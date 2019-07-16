@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59246bf7-54cf-4d65-82a1-1b944a17d11f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Base/base.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/Base/base.mwb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +50,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="y" value="30" />
     <option name="width" value="1366" />
     <option name="height" value="738" />
@@ -68,6 +68,16 @@
               <item name="Ingenieria_software_aplicada" type="b2602c69:ProjectViewProjectNode" />
               <item name="Ingenieria_software_aplicada" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Ingenieria_software_aplicada" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ingenieria_software_aplicada" type="462c0819:PsiDirectoryNode" />
+              <item name="Base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Ingenieria_software_aplicada" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ingenieria_software_aplicada" type="462c0819:PsiDirectoryNode" />
+              <item name="flask_env" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -76,6 +86,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
