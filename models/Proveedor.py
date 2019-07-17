@@ -1,4 +1,5 @@
-from main import db
+from flask_sqlalchemy import SQLAlchemy
+db=SQLAlchemy()
 
 class Proveedor(db.Model):
     __tablename__="Proveedor"
