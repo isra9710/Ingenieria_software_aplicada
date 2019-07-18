@@ -16,8 +16,8 @@ class Usuario(db.Model):
     pedido = relationship("Pedido", backref="Usuario")
     detallePedido = relationship("DetallePedido", backref="Usuario")
 
-    def __init__(self, idUsuario, nombre, contra, tipo, direccion, RFC):
-        self.idUsuario = idUsuario
+    def __init__(self, nombre, contra, tipo, direccion, RFC):
+
         self.nombre = nombre
         self.contra = contra
         self.tipo = tipo

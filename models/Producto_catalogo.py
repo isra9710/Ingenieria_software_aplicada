@@ -12,8 +12,7 @@ class Producto_catalogo(db.Model):
     idUsuario = db.Column('idUsuario', db.Integer, db.ForeignKey("Usuario.idUsuario"))
     precio = db.Column(db.Float)
 
-    def __init__(self,idProducto_catologo,idProveedor,idUsuario,nombre,porcion,descripcion,precio):
-        self.idProducto_catalogo = idProducto_catologo
+    def __init__(self, idProveedor, idUsuario, nombre, porcion, descripcion, precio):
         self.idUsuario = idUsuario
         self.idProveedor = idProveedor
         self.nombre = nombre

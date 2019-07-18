@@ -11,7 +11,6 @@ class Pedido(db.Model):
     total = db.Column(db.Float)
     detallePedido = relationship("DetallePedido", backref="Pedido")
 
-    def __init__(self, idPedido, idUsuario, total):
-        self.idPedido = idPedido
+    def __init__(self, idUsuario, total):
         self.idUsuario = idUsuario
         self.total = total

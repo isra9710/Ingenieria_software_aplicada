@@ -11,8 +11,7 @@ class Proveedor(db.Model):
     productoInventario = relationship("Producto_inventario", backref="Proveedor")
     productoCatalogo = relationship("Producto_catalogo", backref="Proveedor")
 
-    def __init__(self, idProveedor, nombre, RFC, telefono):
-        self.idProveedor = idProveedor
+    def __init__(self, nombre, RFC, telefono):
         self.nombre = nombre
         self.RFC = RFC
         self.telefono = telefono

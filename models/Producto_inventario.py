@@ -17,8 +17,7 @@ class Producto_inventario(db.Model):
     precio = db.Column(db.Float)
     detallePedido = relationship("DetallePedido", backref="Producto_inventario")
 
-    def __init__(self, idProdcuto_inventario, idProveedor, idUsuario, nombre, cantidad, porcion, descripcion, fecha_elaboracion, fecha_vencimiento, precio):
-        self.idProdcuto_inventario = idProdcuto_inventario
+    def __init__(self, idProveedor, idUsuario, nombre, cantidad, porcion, descripcion, fecha_elaboracion, fecha_vencimiento, precio):
         self.idProveedor = idProveedor
         self.idUsuario = idUsuario
         self.nombre = nombre
