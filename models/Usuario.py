@@ -1,6 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
-db = SQLAlchemy()
+from models.shared import db
+#db = SQLAlchemy()
 
 
 class Usuario(db.Model):

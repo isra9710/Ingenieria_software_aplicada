@@ -1,15 +1,14 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import ForeignKey,Column,Integer,Date
-from sqlalchemy.orm import relationship
-db = SQLAlchemy()
+from models.shared import db
+#db = SQLAlchemy()
 
 
 class DetallePedido(db.Model):
     __tablename__ = "DetallePedido"
     idDetallePedido = db.Column(db.Integer, primary_key=True)
-    idPedido = db.Column(db.Integer, ForeignKey="Pedido.idPedido")
-    idUsuario = db.Column(db.Integer, ForeignKey="Usuario.idUsuario")
-    idProducto_inventario = db.Column(db.Integer, ForeignKey="Producto_inventario.idProducto_inventario")
+    cantidad = db.Column(db.Integer)
+    idPedido = db.Column('idPedido', db.Integer, db.ForeignKey("Pedido.idPedido"))
+    idUsuario = db.Column('idUsuario', db.Integer, db.ForeignKey("Usuario.idUsuario"))
+    idProducto_inventario = db.Column('idProducto_inventario', db.Integer, db.ForeignKey("Producto_inventario.idProducto_inventario"))
 
     def __init__(self, idDetallePedido, idPedido, idUsuario, idProducto_inventario):
         self.idDetallePedido = idDetallePedido

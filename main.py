@@ -1,18 +1,14 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from config import DevelopmentConfig
-from Usuario import Usuario,db
-
+from flask import Flask, render_template
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/baseDS'
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/baseDS'  # conexion con la base de datos
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Cosa extra para evitar notificaciones
+from config import *#en el archivo config se encuentran importadas todas las clases, esto para tener menos codigo en el main
+from models.shared import db#se importa el objeto de SQLAlchemy para tenerlo en todos los modulos que se necesiten
 
 
 @app.route("/")
 def index():
-    return "Pagina principal"
-
+    return render_template("index.html")
 
 
 @app.route("/home")
@@ -25,7 +21,15 @@ def almacen():
     return"Este es el almacen"
 
 
-if __name__ == "__main__":
+@app.route("/insertar")
+def insertar():
+    usuario = Proveedor(1, "Isra", "RCIO", "7773123")
+    db.session.add(usuario)
+    db.session.commit()
+    return "Usuario ingresado"
+
+
+if __name__ == '__main__':
     db.init_app(app)
     with app.app_context():
         db.create_all()

@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `baseDS`.`Producto_catalogo` (
   descripcion VARCHAR(45) NOT NULL,
   idUsuario INT NOT NULL,
   idProveedor INT NOT NULL,
-  precio VARCHAR(45) NOT NULL,
+  precio float NOT NULL,
   PRIMARY KEY (idProducto_catalogo),
   INDEX (idUsuario), foreign key (idUsuario) references Usuario(idUsuario),
   INDEX (idProveedor), foreign key (idProveedor) references Proveedor(idProveedor)
