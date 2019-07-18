@@ -23,7 +23,7 @@ def almacen():
 
 @app.route("/insertar")
 def insertar():
-    usuario = Proveedor(1, "Isra", "RCIO", "7773123")
+    usuario = Proveedor("Isra", "RCIO", "7773123")
     db.session.add(usuario)
     db.session.commit()
     return "Usuario ingresado"
