@@ -1,23 +1,32 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from models.Usuario import db, Usuario
-from models.Proveedor import db,Proveedor
-from models.Producto_inventario import  db,Producto_inventario
-from models.Producto_catalogo import db, Prod
-from models.Pedido import db
-from models.DetallePedido import db
+from config import DevelopmentConfig
+from Usuario import Usuario,db
 
-import os
-app= Flask(__name__)
+app = Flask(__name__)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/baseDS'
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+
+@app.route("/")
+def index():
+    return "Pagina principal"
+
 
 
 @app.route("/home")
-def index():
+def home():
     return "Esta es home"
+
 
 @app.route("/almacen")
 def almacen():
     return"Este es el almacen"
 
+
 if __name__ == "__main__":
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
     app.run()

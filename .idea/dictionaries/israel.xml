@@ -1,0 +1,29 @@
+<component name="ProjectDictionaryState">
+  <dictionary name="israel">
+    <words>
+      <w>almacen</w>
+      <w>cantidad</w>
+      <w>catalogo</w>
+      <w>descripcion</w>
+      <w>detalle</w>
+      <w>direccion</w>
+      <w>elaboracion</w>
+      <w>fecha</w>
+      <w>inventario</w>
+      <w>nombre</w>
+      <w>pedido</w>
+      <w>porcion</w>
+      <w>precio</w>
+      <w>prodcuto</w>
+      <w>producto</w>
+      <w>proveedor</w>
+      <w>pymysql</w>
+      <w>sqlalchemy</w>
+      <w>tablename</w>
+      <w>telefono</w>
+      <w>tipo</w>
+      <w>usuario</w>
+      <w>vencimiento</w>
+    </words>
+  </dictionary>
+</component>
