@@ -21,6 +21,12 @@ def almacen():
     return"Este es el almacen"
 
 
+@app.route("/administrador")
+def administrador():
+    return render_template("Administrador.html")
+
+
+
 @app.route("/insertar")
 def insertar():
     usuario = Proveedor("Isra", "RCIO", "7773123")
