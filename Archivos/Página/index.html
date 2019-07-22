@@ -10,28 +10,22 @@
 
   <!-- css -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
-  <link href="{{ url_for('static', filename='ss/bootstrap.css') }}" rel="stylesheet" />
-  <link href="{{ url_for('static', filename='css/bootstrap-responsive.css') }}" rel="stylesheet" />
-  <link href="{{ url_for('static', filename='/css/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='css/jcarousel.css') }}" rel="stylesheet" />
-
-
-
-
-  <link href="{{ url_for('static', filename='css/flexslider.css') }}" rel="stylesheet" />
-
-  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
-
+  <link href="css/bootstrap.css" rel="stylesheet" />
+  <link href="css/bootstrap-responsive.css" rel="stylesheet" />
+  <link href="css/fancybox/jquery.fancybox.css" rel="stylesheet">
+  <link href="css/jcarousel.css" rel="stylesheet" />
+  <link href="css/flexslider.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
   <!-- Theme skin -->
-  <link href="static/skins/default.css" rel="stylesheet" />
+  <link href="skins/default.css" rel="stylesheet" />
   <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/ico/apple-touch-icon-144-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/ico/apple-touch-icon-114-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="static/ico/apple-touch-icon-72-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" href="static/ico/apple-touch-icon-57-precomposed.png" />
-  <link rel="shortcut icon" href="static/ico/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png" />
+  <link rel="shortcut icon" href="ico/favicon.png" />
 
-{{ url_for('static', filename='css/jcarousel.css') }}
+
 </head>
 
 <body>
@@ -152,7 +146,7 @@
                   </div>
                   <div class="control-group">
                     <div class="controls">
-
+                      <button type="submit" class="btn">Reset password</button>
                     </div>
                     <p class="aligncenter margintop20">
                       We will send instructions on how to reset your password to your inbox
@@ -213,14 +207,11 @@
       <div id="nivo-slider">
         <div class="nivo-slider">
           <!-- Slide #1 image -->
-          <img src="{{ url_for('static', filename='img/Deslizables/nivo/mapa_conflictos-1900x600.jpg') }}" alt="" title="#caption-1" />
-
+          <img src="img/slides/nivo/mapa_conflictos-1900x600.jpg" alt="" title="#caption-1" />
           <!-- Slide #2 image -->
-          <img src="{{ url_for('static', filename='img/Deslizables/nivo/scale-apple-1900x600.jpg') }}" alt="" title="#caption-2" />
-
+          <img src="img/slides/nivo/scale-apple-1900x600.jpg" alt="" title="#caption-2" />
           <!-- Slide #3 image -->
-          <img src="{{ url_for('static', filename='img/Deslizables/nivo/supplements-1900x600.jpg') }}" alt="" title="#caption-3" />
-
+          <img src="img/slides/nivo/supplements-1900x600.jpg" alt="" title="#caption-3" />
         </div>
         <div class="container">
           <div class="row">
@@ -327,13 +318,13 @@
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="static/img/works/thumbs/" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                    <img src="img/works/thumbs/" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
-                  <li class="static/item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
+                  <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="static/img/works/full/">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="img/works/full/">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
