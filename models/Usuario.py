@@ -11,9 +11,9 @@ class Usuario(db.Model):
     tipo = db.Column(db.String(45))
     direccion = db.Column(db.String(45))
     RFC = db.Column(db.String(45))
-    productoInventario = relationship("Producto_inventario", backref="Usuario")
     productoCatalogo = relationship("Producto_catalogo", backref="Usuario")
     pedido = relationship("Pedido", backref="Usuario")
+    cliente=relationship("Cliente", backref="Usuario")
     detallePedido = relationship("DetallePedido", backref="Usuario")
 
     def __init__(self, nombre, contra, tipo, direccion, RFC):
