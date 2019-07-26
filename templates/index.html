@@ -10,28 +10,22 @@
 
   <!-- css -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
-  <link href="{{ url_for('static', filename='ss/bootstrap.css') }}" rel="stylesheet" />
-  <link href="{{ url_for('static', filename='css/bootstrap-responsive.css') }}" rel="stylesheet" />
-  <link href="{{ url_for('static', filename='/css/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='css/jcarousel.css') }}" rel="stylesheet" />
-
-
-
-
-  <link href="{{ url_for('static', filename='css/flexslider.css') }}" rel="stylesheet" />
-
-  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
-
+  <link href="{{ url_for ('static', filename='css/bootstrap.css') }}" rel="stylesheet" />
+  <link href="{{ url_for ('static', filename='css/bootstrap-responsive.css') }}" rel="stylesheet" />
+  <link href="{{ url_for ('static', filename='css/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+  <link href="{{ url_for ('static', filename='css/jcarousel.css') }}" rel="stylesheet" />
+  <link href="{{ url_for ('static', filename='css/flexslider.css') }}" rel="stylesheet" />
+  <link href="{{ url_for ('static', filename='css/style.css') }}" rel="stylesheet" />
   <!-- Theme skin -->
-  <link href="static/skins/default.css" rel="stylesheet" />
+  <link href="{{ url_for ('static', filename='skins/default.css') }}" rel="stylesheet" />
   <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/ico/apple-touch-icon-144-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/ico/apple-touch-icon-114-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="static/ico/apple-touch-icon-72-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" href="static/ico/apple-touch-icon-57-precomposed.png" />
-  <link rel="shortcut icon" href="static/ico/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ url_for ('static', filename='ico/apple-touch-icon-144-precomposed.png') }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ url_for ('static', filename='ico/apple-touch-icon-114-precomposed.png') }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url_for ('static', filename='ico/apple-touch-icon-72-precomposed.png') }}" />
+  <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='ico/apple-touch-icon-57-precomposed.png') }}" />
+  <link rel="shortcut icon" href="{{ url_for ('static', filename='ico/favicon.png') }}" />
 
-{{ url_for('static', filename='css/jcarousel.css') }}
+
 </head>
 
 <body>
@@ -75,9 +69,9 @@
               <div class="modal-body">
                 <form class="form-horizontal">
                   <div class="control-group">
-                    <label class="control-label" for="inputEmail">Email</label>
+                    <label class="control-label" for="inputEmail">Usuario</label>
                     <div class="controls">
-                      <input type="text" id="inputEmail" placeholder="Email">
+                      <input type="text" id="inputEmail" placeholder="Usuario">
                     </div>
                   </div>
                   <div class="control-group">
@@ -111,26 +105,23 @@
                 <h4 id="mySigninModalLabel">Inicia sesión con  <strong>tu cuenta</strong></h4>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="/login" method="POST" name=""login>
                   <div class="control-group">
                     <label class="control-label" for="inputText">Usuario</label>
                     <div class="controls">
-                      <input type="text" id="inputText" placeholder="Usuario">
+                      <input type="text" name="usuario" placeholder="Usuario" required>
                     </div>
                   </div>
                   <div class="control-group">
                     <label class="control-label" for="inputSigninPassword">Contraseña</label>
                     <div class="controls">
-                      <input type="password" id="inputSigninPassword" placeholder="Contraseña">
+                      <input type="password"  name="contra"  placeholder="Contraseña" required>
                     </div>
                   </div>
                   <div class="control-group">
                     <div class="controls">
                       <button type="submit" class="btn">Entrar</button>
                     </div>
-                    <p class="aligncenter margintop20">
-                      ¿Olvidaste tu contraseña? <a href="#myReset" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Reset</a>
-                    </p>
                   </div>
                 </form>
               </div>
@@ -152,7 +143,7 @@
                   </div>
                   <div class="control-group">
                     <div class="controls">
-
+                      <button type="submit" class="btn">Reset password</button>
                     </div>
                     <p class="aligncenter margintop20">
                       We will send instructions on how to reset your password to your inbox
@@ -180,7 +171,7 @@
                       <a href="index.html">Inicio <i class="icon-angle-down"></i></a>
                     </li>
                     <li class="dropdown">
-                      <a href="#">Catalogo <i class="icon-angle-down"></i></a>
+                      <a href="#"> <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">
                         <li><a href="typography.html">General</a></li>
                         <li><a href="table.html">Categoria1</a></li>
@@ -213,14 +204,11 @@
       <div id="nivo-slider">
         <div class="nivo-slider">
           <!-- Slide #1 image -->
-          <img src="{{ url_for('static', filename='img/Deslizables/nivo/mapa_conflictos-1900x600.jpg') }}" alt="" title="#caption-1" />
-
+          <img src="{{ url_for('static', filename='img/slides/nivo/mapa_conflictos-1900x600.jpg') }}" alt="" title="#caption-1" />
           <!-- Slide #2 image -->
-          <img src="{{ url_for('static', filename='img/Deslizables/nivo/scale-apple-1900x600.jpg') }}" alt="" title="#caption-2" />
-
+          <img src="{{ url_for('static', filename='img/slides/nivo/scale-apple-1900x600.jpg') }}" alt="" title="#caption-2" />
           <!-- Slide #3 image -->
-          <img src="{{ url_for('static', filename='img/Deslizables/nivo/supplements-1900x600.jpg') }}" alt="" title="#caption-3" />
-
+          <img src="{{ url_for('static',filename='img/slides/nivo/supplements-1900x600.jpg') }}" alt="" title="#caption-3" />
         </div>
         <div class="container">
           <div class="row">
@@ -250,7 +238,7 @@
                 <div>
                   <h2>Sólo por <strong>mayoreo</strong></h2>
                   <p>
-                    Poner descrpción de mayoreo.
+                    Poner descripción de algo de mayoreo.
                   </p>
 
                 </div>
@@ -316,7 +304,7 @@
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                    <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
@@ -327,18 +315,18 @@
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="static/img/works/thumbs/" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                    <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
-                  <li class="static/item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
+                  <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="static/img/works/full/">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="img/works/full/">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                  <!-- Imagen chica-->  <img src="img/works/thumbs/" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                  <!-- Imagen chica-->  <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
@@ -349,18 +337,18 @@
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/" alt="Podríamos poner descripcion de imagenes o de lugares de entrega.">
+                    <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega.">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 photography" data-id="id-4" data-type="web">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Sea" href="img/works/full/image-05-full.jpg">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Sea" href="{{ url_for('static', filename='img/works/full/image-05-full.jpg') }}">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-05.jpg" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                    <img src="{{ url_for('static', filename='img/works/thumbs/image-05.jpg') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
@@ -371,29 +359,29 @@
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                    <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="img/works/full/image-07-full.jpg">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{{ url_for('static', filename='img/works/full/image-07-full.jpg') }}">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-07.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                    <img src="{{ url_for('static', filename='img/works/thumbs/image-07.jpg') }}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Dark" href="img/works/full/image-08-full.jpg">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Dark" href="{{ url_for('static', filename='img/works/full/image-08-full.jpg') }}">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-08.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                    <img src="url_for('static', filename='img/works/thumbs/image-08.jpg') }}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                   </li>
                   <!-- End Item Project -->
                 </ul>
@@ -471,24 +459,24 @@
   </div>
   <a href="#" class="scrollup"><i class="icon-chevron-up icon-square icon-32 active"></i></a>
 
-  <script src="js/jquery.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/bootstrap.js"></script>
-  <script src="js/jcarousel/jquery.jcarousel.min.js"></script>
-  <script src="js/jquery.fancybox.pack.js"></script>
-  <script src="js/jquery.fancybox-media.js"></script>
-  <script src="js/google-code-prettify/prettify.js"></script>
-  <script src="js/portfolio/jquery.quicksand.js"></script>
-  <script src="js/portfolio/setting.js"></script>
-  <script src="js/jquery.flexslider.js"></script>
-  <script src="js/jquery.nivo.slider.js"></script>
-  <script src="js/modernizr.custom.js"></script>
-  <script src="js/jquery.ba-cond.min.js"></script>
-  <script src="js/jquery.slitslider.js"></script>
-  <script src="js/animate.js"></script>
+  <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jcarousel/jquery.jcarousel.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.fancybox.pack.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.fancybox-media.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/google-code-prettify/prettify.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/portfolio/jquery.quicksand.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/portfolio/setting.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.flexslider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.nivo.slider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/modernizr.custom.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.ba-cond.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.slitslider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
 
 
-  <script src="js/custom.js"></script>
+  <script src="{{ url_for('static',filename='js/custom.js') }}"></script>
 
 </body>
 </html>

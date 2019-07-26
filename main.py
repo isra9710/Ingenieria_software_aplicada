@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, session, flash, redirect, url_for
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/baseDS'  # conexion con la base de datos
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Cosa extra para evitar notificaciones
@@ -9,6 +9,30 @@ from models.shared import db#se importa el objeto de SQLAlchemy para tenerlo en 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    print("Hola")
+    usuario = request.form.get("usuario")
+    print(usuario)
+    usuario = Usuario.query.get(request.form.get("nombre"))
+    print(usuario.tipo)
+    if usuario:
+        if usuario.contra == request.form.get("contra"):
+            if usuario.tipo == "Administrador":
+                return render_template("admin.html")
+            elif usuario.tipo == "Empleado":
+                return render_template("empleado.html")
+            else:
+                return render_template("cliente.html")
+        else:
+            return render_template("index.html")
+
+    else:
+        render_template("index.html")
+
+
 
 
 @app.route("/home")
