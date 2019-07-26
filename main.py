@@ -13,15 +13,13 @@ def index():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    print("Hola")
-    usuario = request.form.get("usuario")
-    print(usuario)
-    usuario = Usuario.query.get(request.form.get("nombre"))
+    usuario = Usuario.query.filter_by(nombre=request.form['usuario']).first()
+
     print(usuario.tipo)
     if usuario:
         if usuario.contra == request.form.get("contra"):
             if usuario.tipo == "Administrador":
-                return render_template("admin.html")
+                return render_template("admin.html",usuario.tipo)
             elif usuario.tipo == "Empleado":
                 return render_template("empleado.html")
             else:
