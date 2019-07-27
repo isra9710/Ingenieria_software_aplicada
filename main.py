@@ -14,12 +14,10 @@ def index():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     usuario = Usuario.query.filter_by(nombre=request.form['usuario']).first()
-
-    print(usuario.tipo)
     if usuario:
         if usuario.contra == request.form.get("contra"):
             if usuario.tipo == "Administrador":
-                return render_template("admin.html",usuario.tipo)
+                return render_template("admin.html")
             elif usuario.tipo == "Empleado":
                 return render_template("empleado.html")
             else:
@@ -29,8 +27,6 @@ def login():
 
     else:
         render_template("index.html")
-
-
 
 
 @app.route("/home")
@@ -46,7 +42,6 @@ def almacen():
 @app.route("/administrador")
 def administrador():
     return render_template("Administrador.html")
-
 
 
 @app.route("/insertar")

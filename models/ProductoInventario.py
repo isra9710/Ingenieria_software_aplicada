@@ -2,7 +2,7 @@ from sqlalchemy.orm import relationship
 from models.shared import db
 
 
-class Producto_inventario(db.Model):
+class ProductoInventario(db.Model):
     __tablename__ = "Producto_inventario"
     idProducto_inventario = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(45))
