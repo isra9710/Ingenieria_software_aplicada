@@ -13,3 +13,6 @@ class Pedido(db.Model):
     def __init__(self, idUsuario, total):
         self.idUsuario = idUsuario
         self.total = total
+
+    def __repr__(self):
+        return ''

@@ -52,6 +52,17 @@ def insertar():
     return "Usuario ingresado"
 
 
+@app.route("/mostrarMedicamentos")
+def crudMedicamentos():
+    medicamentos = ProductoInventario.query.all()
+    return render_template("mostrarMedicamentos.html", medicamentos=medicamentos)
+
+
+@app.route("/agregarMedicamento")
+def agregarMedicamentos():
+    return crudMedicamentos()
+
+
 if __name__ == '__main__':
     db.init_app(app)
     with app.app_context():

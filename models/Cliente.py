@@ -17,4 +17,5 @@ class Cliente(db.Model):
         self.direccion = direccion
         self.nombreEstablecimiento = nombre
 
-
+    def __repr__(self):
+        return ''

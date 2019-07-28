@@ -16,3 +16,5 @@ class Proveedor(db.Model):
         self.rfc = rfc
         self.telefono = telefono
 
+    def __repr__(self):
+        return ''

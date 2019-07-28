@@ -16,3 +16,6 @@ class Usuario(db.Model):
         self.nombre = nombre
         self.contra = contra
         self.tipo = tipo
+
+    def __repr__(self):
+        return ''

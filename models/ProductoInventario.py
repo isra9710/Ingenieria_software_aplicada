@@ -3,7 +3,7 @@ from models.shared import db
 
 
 class ProductoInventario(db.Model):
-    __tablename__ = "Producto_inventario"
+    __tablename__ = "ProductoInventario"
     idProducto_inventario = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(45))
     cantidad = db.Column(db.Integer)
@@ -27,3 +27,5 @@ class ProductoInventario(db.Model):
         self.fecha_vencimiento = fecha_vencimiento
         self.precio = precio
 
+    def __repr__(self):
+        return ''

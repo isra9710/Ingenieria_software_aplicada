@@ -42,7 +42,7 @@ class Proveedor(db.Model):
         self.telefono = telefono
 
 
-class Producto_inventario(db.Model):
+class ProductoInventario(db.Model):
     __tablename__ = "Producto_inventario"
     idProdcuto_inventario = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(45))
