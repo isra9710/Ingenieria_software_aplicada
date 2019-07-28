@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, session, flash, redirect, url
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/baseDS'  # conexion con la base de datos
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Cosa extra para evitar notificaciones
-from config import *#en el archivo config se encuentran importadas todas las clases, esto para tener menos codigo en el main
+from config import * #en el archivo config se encuentran importadas todas las clases, esto para tener menos codigo en el main
 from models.shared import db#se importa el objeto de SQLAlchemy para tenerlo en todos los modulos que se necesiten
 
 
@@ -68,3 +68,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run()
+
