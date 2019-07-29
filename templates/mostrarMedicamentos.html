@@ -422,17 +422,17 @@
     					<div class="modal-body">
     						<div class="form-group">
     							<label>ID Empleado</label>
-    							<select name="emple">
-                            <option value="novalido" selected disabled hidden required>Selecciona un empleado</option>
+    							<select name="emple" required>
+                            <option value="novalido" selected disabled hidden>Selecciona un empleado</option>
                             {% for administrador in administradores %}
                                 <option>{{ administrador.nombre }}</option>
                             {% endfor %}
-                        </select>
+                        		</select>
     						</div>
     						<div class="form-group">
     							<label>ID Proveedor</label>
-    							<select name="proveedor">
-                            <option value="novalido" required selected disabled hidden>Selecciona un proveedor</option>
+    							<select name="proveedor" required>
+                            <option value="novalido"  selected disabled hidden>Selecciona un proveedor</option>
                             {% for proveedor in proveedores %}
                                 <option>{{ proveedor.nombre }}</option>
                             {% endfor %}
@@ -461,7 +461,7 @@
     								<span class="validity"></span>
      							 </div>
       							<div>
-        						<input type="submit">
+        						<input type="submit" >
       							</div>
     						</div>
     						<div class="form-group">
@@ -481,7 +481,7 @@
     						</div>
     						<div class="form-group">
     							<label>Imagen medicamento</label>
-    							<input type="file" name="file">
+    							<input type="file" name="file" required>
     						</div>
     					</div>
     					<div class="modal-footer">
