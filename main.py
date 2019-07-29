@@ -107,8 +107,11 @@ def editarMedicamento():
         string = medicaO.imagen
     else:
         string = f.filename
-    if medicaO.nombre == request.form.get("nombre"):
-        
+    medicaO.imagen = string
+    proveedor = Proveedor.query.filter_by(idProveedor=request.form["proveedor"])
+    usuario = Usuario.query.filter_by(idUsuario=request.form["usuario"])
+    if medicaO.nombre != request.form.get("nombre"):
+        medicaAux = ProductoInventario.query.filter_by(idProducto_inventario=medicaO.idProducto_inventario).first()
 
     return crudMedicamentos()
 
