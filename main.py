@@ -86,7 +86,7 @@ def agregarMedicamento():
         return crudMedicamentos()
 
 
-@app.route("/llenareditar/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos de "mostrar universiadades"
+@app.route("/llenareditar/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
 def llenareditar(id):
     medicamento = ProductoInventario.query.filter_by(idProducto_inventario=id).first()
     empleado = Usuario.query.filter_by(idUsuario=medicamento.idUsuario).first()
@@ -115,11 +115,7 @@ def editarMedicamento():
 
     return crudMedicamentos()
 
-
-@app.route("/prueba")
-def prueba():
-    return render_template("index.html")
-
+#--------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'

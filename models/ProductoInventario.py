@@ -8,7 +8,7 @@ class ProductoInventario(db.Model):
     nombre = db.Column(db.String(45))
     cantidad = db.Column(db.Integer)
     porcion = db.Column(db.Float)
-    descripcion = db.Column(db.String(300))
+    descripcion = db.Column(db.String(250))
     fecha_elaboracion = db.Column(db.Date)
     fecha_vencimiento = db.Column(db.Date)
     idProveedor = db.Column('idProveedor', db.Integer, db.ForeignKey("Proveedor.idProveedor"))
