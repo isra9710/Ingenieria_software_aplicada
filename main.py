@@ -115,6 +115,16 @@ def editarMedicamento():
 
     return crudMedicamentos()
 
+
+@app.route('/eliminarMedicamento/<string:id>', methods=['GET', 'POST'])
+def eliminar(id):
+    medica = ProductoInventario.query.filter_by(idProducto_inventario=id).first()
+    db.session.delete(medica)
+    db.session.commit()
+    flash("Medicamento eliminado con exito")
+    return redirect(url_for('mostrarMedicamentos'))
+
+
 #--------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':

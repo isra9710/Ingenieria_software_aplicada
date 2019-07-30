@@ -6,7 +6,7 @@ class Usuario(db.Model):
     __tablename__ = 'Usuario'
     idUsuario = db.Column(db.Integer, primary_key=True)
     idEstado = db.Column('idEstado', db.Integer, db.ForeignKey("Estado.idEstado"))
-    nombre = db.Column(db.String(15))
+    nombre = db.Column(db.String(15), unique=True)
     contra = db.Column(db.String(10))
     tipo = db.Column(db.String(15))
     cliente = relationship("Cliente", backref="Usuario")
