@@ -9,7 +9,6 @@ class Usuario(db.Model):
     nombre = db.Column(db.String(15))
     contra = db.Column(db.String(10))
     tipo = db.Column(db.String(15))
-
     cliente = relationship("Cliente", backref="Usuario")
     productoI = relationship("ProductoInventario", backref="Usuario")
 

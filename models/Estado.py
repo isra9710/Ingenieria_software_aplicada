@@ -9,8 +9,7 @@ class Estado(db.Model):
     nombreEstado = db.Column(db.String(20))
     numEstado = db.Column(db.Integer)
     zona = db.Column(db.String(10))
-
-    usuario = relationship("usuario", backref="Estado")
+    usuario = relationship("Usuario", backref="Estado")
 
     def __init__(self, nombreEstado, numEstado, zona):
         self.nombreEstado = nombreEstado

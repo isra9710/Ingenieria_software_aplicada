@@ -7,6 +7,7 @@ from models.ProductoInventario import ProductoInventario
 from models.Pedido import Pedido
 from models.DetallePedido import DetallePedido
 from models.Cliente import Cliente
+from models.Estado import Estado
 
 
 class Config(object):
