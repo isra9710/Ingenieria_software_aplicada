@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editar proveedores</title>
+
+
+
+	<!--  -->
+	<!-- JQUERY--->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<!-- CSS de boostrap--->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}" />
+
+
+</head>
+
+	<!---------------------------------BARRA1---------------------------------------->
+<body>
+	<!-- Edit Modal HTML -->
+	<div class="container">
+		<form method="POST" action="{{url_for('editarEmpleado')}}" >
+
+
+
+			  <div class="form-group row">
+			    <label for="inputPassword" class="col-sm-2 col-form-label">ID empleado:</label>
+			    <div class="col-sm-10">
+
+			      <input type="text" readonly value={{empleado.idUsuaio}} class="form-control" name="idUsuario" required >
+
+			    </div>
+			  </div>
+
+			  <div class="form-group row">
+			    <label for="inputPassword" class="col-sm-2 col-form-label">ID empleado:</label>
+			    <div class="col-sm-10">
+
+			      <input type="text" readonly value={{empleado.contra}} class="form-control" name="idUsuario" required >
+
+			    </div>
+
+			  </div>
+              <div class="form-group row">
+			    <label for="inputPassword" class="col-sm-2 col-form-label">Estado:</label>
+			    <div class="col-sm-10">
+					<select name="usuario" required>
+					 <option value={{estadoO.nombre}} selected="selected">{{ estadoO.nombre }}</option>
+					{% for estado in estados %}
+						{% if estadoO.nombre != estado.nombre %}
+			     		 <option>{{estado.nombre}}</option>
+						{% endif %}
+					{% endfor %}
+					</select>
+			    </div>
+			  </div>
+
+									<div class="modal-footer">
+										<a class="btn btn-primary" href="/mostrarEmpleados" role="button">Cancelar</a>
+										<input class="btn btn-success" type="submit" value="Guardar">
+
+								</div>
+		</form>
+	</div>
+
+</body>
+
+</html>

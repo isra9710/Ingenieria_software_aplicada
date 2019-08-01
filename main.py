@@ -29,30 +29,24 @@ def login():
     else:
         render_template("index.html")
 
-
-@app.route("/home")
-def home():
+#Inicio de las funciones de paginas principales de los 3 tipos de usuario, cliente, empleado, administrador#
+@app.route("/cliente")
+def cliente():
     return "Esta es home"
 
 
-@app.route("/almacen")
-def almacen():
+@app.route("/empleado")
+def empleado():
     return"Este es el almacen"
 
 
 @app.route("/administrador")
 def administrador():
     return render_template("Administrador.html")
+#Fin de las funciones de paginas principales de los 3 tipos de usuario, cliente, empleado, administrador#
 
 
-@app.route("/insertar")
-def insertar():
-    usuario = Proveedor("Isra", "RCIO", "7773123")
-    db.session.add(usuario)
-    db.session.commit()
-    return "Usuario ingresado"
-
-
+#Aqui empiezan los CRUD#
 @app.route("/mostrarMedicamentos")
 def crudMedicamentos():
     medicamentos = ProductoInventario.query.all()
@@ -122,10 +116,70 @@ def eliminar(id):
     db.session.delete(medica)
     db.session.commit()
     flash("Medicamento eliminado con exito")
-    return redirect(url_for('mostrarMedicamentos'))
+    return crudMedicamentos()
 
 
-#--------------------------------------------------------------------------------------------------------------
+@app.route('/mostrarEmpleados')
+def mostrarEmpleados():
+    empleados = Usuario.query.filter_by(tipo="Empleados")
+    return render_template("mostrarEmpleados.html", empleados=empleados)
+
+
+@app.route("/agregarEmpleado")
+def agregarEmpleado():
+    empleado = Usuario(request.form.get['nombre'], request.form.get['contra'], "Empleado")
+    db.session.add(empleado)
+    db.session.commit()
+    flash("Usuario registrado correctamente, pidale al mismo que cambie su contraseña")
+    return mostrarEmpleados()
+
+
+@app.route("/llenareditarEmpleado/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
+def llenareditarEmpleado(id):
+    empleado = Usuario.query.filter_by(idUsuario=id).first()
+    estadoO = Estado.query.filter_by(idEstado=empleado.idEstado).first()
+    estados = Estado.query.all()
+    return render_template("editarEmpleados.html", empleado=empleado, estadoO=estadoO, estados=estados)
+
+
+@app.route("/editarEmpleado")
+def editarEmpleado():
+    flash("Si entra a editar medicamento")
+    return mostrarEmpleados()
+
+
+@app.route('/eliminarEmpleado/<string:id>', methods=['GET', 'POST'])
+def eliminarEmpleado(id):
+    empleado = Usuario.query.filter_by(idUsuario=id).first()
+    db.session.delete(empleado)
+    db.session.commit()
+    flash("Empleado eliminado con exito")
+    return mostrarEmpleados()
+
+
+@app.route('/mostrarProveedores')
+def mostrarProveedores():
+    proveedores = Proveedor.query.all()
+    return render_template("mostrarProveedores.html", proveedores=proveedores)
+
+
+@app.route("/agregarProveedor")
+def agregarProveedor():
+    proveedor = Proveedor(request.form.get["nombre"], request.form.get["rfc"], request.form.get["tel"])
+    db.session.add(proveedor)
+    db.session.commit()
+    flash("Proveedor registrado correctamente")
+    return mostrarProveedores()
+
+@app.route("/llenareditarProveedor/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
+def llenareditarProveedor(id):
+    proveedor = Proveedor.query.filter_by(idProveedor=id).first()
+    return render_template("editarProveedores.html", proveedor=proveedor)
+
+
+
+#Aqui terminan los CRUD
+
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
