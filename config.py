@@ -3,7 +3,7 @@
 import os
 from models.Usuario import Usuario
 from models.Proveedor import Proveedor
-from models.ProductoInventario import ProductoInventario
+from models.Medicamento import Medicamento
 from models.Pedido import Pedido
 from models.DetallePedido import DetallePedido
 from models.Cliente import Cliente

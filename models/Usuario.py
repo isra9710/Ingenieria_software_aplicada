@@ -12,11 +12,12 @@ class Usuario(db.Model):
     cliente = relationship("Cliente", backref="Usuario")
     productoI = relationship("ProductoInventario", backref="Usuario")
 
-    def __init__(self, nombre, contra, tipo):
+    def __init__(self, nombre, contra, tipo, idEstado):
 
         self.nombre = nombre
         self.contra = contra
         self.tipo = tipo
+        self.idEstado = idEstado
 
     def __repr__(self):
         return ''
