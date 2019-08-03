@@ -259,7 +259,7 @@ def validarNombreP(nombreO, nombreN):
         else:
             return True
 #Aqui terminan los CRUD
-
+###Aqui prueba para git###
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
