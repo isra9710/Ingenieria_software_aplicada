@@ -141,13 +141,20 @@ def mostrarEmpleados():
 
 @app.route("/agregarEmpleado", methods=['GET', 'POST'])
 def agregarEmpleado():
-    estado = Estado.query.filter_by(nombreEstado=request.form['estado']).first()
-    empleado = Usuario(request.form['nombre'], request.form['contra'], "Empleado", estado.idEstado)
-    db.session.add(empleado)
-    db.session.commit()
-    flash("Usuario registrado correctamente, pidale al mismo que cambie su contraseña")
-    return mostrarEmpleados()
-
+    usuario = Usuario.query.filter_by(nombre=request.form['nombre']).all()
+    if usuario:
+        flash("Ese usuario ya existe")
+        return mostrarEmpleados()
+    elif request.form['estado'] is not None:
+        estado = Estado.query.filter_by(nombreEstado=request.form['estado']).first()
+        empleado = Usuario(request.form['nombre'], request.form['contra'], "Empleado", estado.idEstado)
+        db.session.add(empleado)
+        db.session.commit()
+        flash("Usuario registrado correctamente, pidale al mismo que cambie su contraseña")
+        return mostrarEmpleados()
+    else:
+        flash("Ingresaste un dato erroneo")
+        return mostrarEmpleados()
 
 @app.route("/llenareditarEmpleado/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
 def llenareditarEmpleado(id):
@@ -171,6 +178,7 @@ def editarEmpleado():
     else:
         flash("Ocurrio un error, quiza el nombre que editaste ya existe o ingresaste algun otro dato erroneo")
         return mostrarEmpleados()
+
 
 def validarNombreU(nombreO,nombreN):
     usuarioO = Usuario.query.filter_by(nombre=nombreO).first()
@@ -201,11 +209,22 @@ def mostrarProveedores():
 
 @app.route("/agregarProveedor", methods=['GET', 'POST'])
 def agregarProveedor():
-    proveedor = Proveedor(request.form.get["nombre"], request.form.get["rfc"], request.form.get["tel"])
-    db.session.add(proveedor)
-    db.session.commit()
-    flash("Proveedor registrado correctamente")
-    return mostrarProveedores()
+    pro = Proveedor.query.filter_by(nombre=request.form['nombre']).all()
+    if pro:
+        flash("Ese proveedor ya esta registrado con nosotros")
+        return mostrarProveedores()
+    pro = Proveedor.query.filter_by(rfc=request.form['rfc'])
+    clien = Cliente.query.filter_by(rfc=request.form['rfc'])
+    if pro or clien:
+        flash("Ese rfc ya se encuentra registrado")
+        return mostrarProveedores()
+    else:
+        proveedor = Proveedor(request.form.get["nombre"], request.form.get["rfc"], request.form.get["tel"])
+        db.session.add(proveedor)
+        db.session.commit()
+        flash("Proveedor registrado correctamente")
+        return mostrarProveedores()
+
 
 @app.route("/llenareditarProveedor/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
 def llenareditarProveedor(id):
@@ -213,7 +232,32 @@ def llenareditarProveedor(id):
     return render_template("editarProveedores.html", proveedor=proveedor)
 
 
+@app.route("/editarProveedor", methods=['GET', 'POST'])
+def editarProveedor():
+    usuario = Usuario.query.filter_by(idUsuario=request.form["idUsuario"]).first()
+    estado = Estado.query.filter_by(nombreEstado=request.form['estado']).first()
+    if validarNombreU(usuario.nombre, request.form['nombre']) is True:
+        usuario.nombre=request.form['nombre']
+        usuario.idEstado=estado.idEstado
+        usuario.contra=request.form['contra']
+        db.session.commit()
+        flash("Empleado editado")
+        return mostrarEmpleados()
+    else:
+        flash("Ocurrio un error, quiza el nombre que editaste ya existe o ingresaste algun otro dato erroneo")
+        return mostrarEmpleados()
 
+
+def validarNombreP(nombreO, nombreN):
+    proveeO = Proveedor.query.filter_by(nombre=nombreO).first()
+    if nombreO == nombreN:
+        return True
+    else:
+        proveeN = Proveedor.query.filter(Proveedor.idProveedor != proveeO.idProveedor, Proveedor.nombre == nombreN).all()
+        if proveeN:
+            return False
+        else:
+            return True
 #Aqui terminan los CRUD
 
 

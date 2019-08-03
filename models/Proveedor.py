@@ -9,7 +9,7 @@ class Proveedor(db.Model):
     nombre = db.Column(db.String(20), unique=True)
     rfc = db.Column(db.String(13))
     telefono = db.Column(db.String(10))
-    productoInventario = relationship("ProductoInventario", backref="Proveedor")
+    productoInventario = relationship("Medicamento", backref="Proveedor")
 
     def __init__(self, nombre, rfc, telefono):
         self.nombre = nombre
