@@ -53,7 +53,7 @@ def mostarMedicamentos():
     medicamentos = Medicamento.query.all()
     administradores = Usuario.query.filter_by(tipo="Administrador")
     proveedores = Proveedor.query.all()
-    return render_template("mostrarMedicamentos.html", medicamentos=medicamentos, administradores=administradores, proveedores=proveedores)
+    return render_template("administrador/mostrarMedicamentos.html", medicamentos=medicamentos, administradores=administradores, proveedores=proveedores)
 
 
 @app.route("/agregarMedicamento", methods=['GET', 'POST'])
@@ -88,7 +88,7 @@ def llenareditar(id):
     empleados = Usuario.query.all()
     proveedores = Proveedor.query.all()
     proveedor = Proveedor.query.filter_by(idProveedor=medicamento.idProveedor).first()
-    return render_template("editarMedicamentos.html", medicamento=medicamento, empleado=empleado, empleados=empleados, proveedor=proveedor, proveedores=proveedores)
+    return render_template("administrador/editarMedicamentos.html", medicamento=medicamento, empleado=empleado, empleados=empleados, proveedor=proveedor, proveedores=proveedores)
 
 
 @app.route("/editarMedicamento")
@@ -136,7 +136,7 @@ def eliminarMedicamento(id):
 def mostrarEmpleados():
     empleados = Usuario.query.filter_by(tipo="Empleado")
     estados = Estado.query.all()
-    return render_template("mostrarEmpleados.html", empleados=empleados, estados=estados)
+    return render_template("administrador/mostrarEmpleados.html", empleados=empleados, estados=estados)
 
 
 @app.route("/agregarEmpleado", methods=['GET', 'POST'])
@@ -161,7 +161,7 @@ def llenareditarEmpleado(id):
     empleado = Usuario.query.filter_by(idUsuario=id).first()
     estadoO = Estado.query.filter_by(idEstado=empleado.idEstado).first()
     estados = Estado.query.all()
-    return render_template("editarEmpleados.html", empleado=empleado, estadoO=estadoO, estados=estados)
+    return render_template("administrador/editarEmpleados.html", empleado=empleado, estadoO=estadoO, estados=estados)
 
 
 @app.route("/editarEmpleado", methods=['GET', 'POST'])
@@ -204,7 +204,7 @@ def eliminarEmpleado(id):
 @app.route('/mostrarProveedores')
 def mostrarProveedores():
     proveedores = Proveedor.query.all()
-    return render_template("mostrarProveedores.html", proveedores=proveedores)
+    return render_template("administrador/mostrarProveedores.html", proveedores=proveedores)
 
 
 @app.route("/agregarProveedor", methods=['GET', 'POST'])
@@ -229,7 +229,7 @@ def agregarProveedor():
 @app.route("/llenareditarProveedor/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
 def llenareditarProveedor(id):
     proveedor = Proveedor.query.filter_by(idProveedor=id).first()
-    return render_template("editarProveedores.html", proveedor=proveedor)
+    return render_template("administrador/editarProveedores.html", proveedor=proveedor)
 
 
 @app.route("/editarProveedor", methods=['GET', 'POST'])
