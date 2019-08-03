@@ -6,10 +6,10 @@ from models.shared import db
 class Proveedor(db.Model):
     __tablename__ = 'Proveedor'
     idProveedor = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(45))
-    rfc = db.Column(db.String(45))
-    telefono = db.Column(db.String(45))
-    productoInventario = relationship("ProductoInventario", backref="Proveedor")
+    nombre = db.Column(db.String(20), unique=True)
+    rfc = db.Column(db.String(13))
+    telefono = db.Column(db.String(10))
+    productoInventario = relationship("Medicamento", backref="Proveedor")
 
     def __init__(self, nombre, rfc, telefono):
         self.nombre = nombre
