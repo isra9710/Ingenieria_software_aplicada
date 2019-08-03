@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Distribuye Salud</title>
-    <h1>Pagina principal de cliente</h1>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="" />
   <meta name="author" content="" />
@@ -27,6 +26,7 @@
 
 
 </head>
+
 
 <body>
   <div id="wrapper">
@@ -61,42 +61,7 @@
               </ul>
             </div>
             <!-- Signup Modal -->
-            <div id="mySignup" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="mySignupModalLabel" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 id="mySignupModalLabel">Create an <strong>account</strong></h4>
-              </div>
-              <div class="modal-body">
-                <form class="form-horizontal">
-                  <div class="control-group">
-                    <label class="control-label" for="inputEmail">Usuario</label>
-                    <div class="controls">
-                      <input type="text" id="inputEmail" placeholder="Usuario">
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label" for="inputSignupPassword">Password</label>
-                    <div class="controls">
-                      <input type="password" id="inputSignupPassword" placeholder="Password">
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label" for="inputSignupPassword2">Confirm Password</label>
-                    <div class="controls">
-                      <input type="password" id="inputSignupPassword2" placeholder="Password">
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <div class="controls">
-                      <button type="submit" class="btn">Sign up</button>
-                    </div>
-                    <p class="aligncenter margintop20">
-                      ¿Ya tienes cuenta? <a href="#mySignin" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Sign in</a>
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </div>
+
             <!-- end signup modal -->
             <!-- Sign in Modal -->
             <div id="mySignin" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="mySigninModalLabel" aria-hidden="true">
@@ -110,52 +75,30 @@
               <div class="modal-body">
                 <form class="form-horizontal" action="/login" method="POST" name=""login>
                   <div class="control-group">
-                    <label class="control-label" for="inputText">Usuario</label>
                     <div class="controls">
-                      <input type="text" name="usuario" placeholder="Usuario" required>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label" for="inputSigninPassword">Contraseña</label>
-                    <div class="controls">
-                      <input type="password"  name="contra"  placeholder="Contraseña" required>
                     </div>
                   </div>
                   <div class="control-group">
                     <div class="controls">
-                      <button type="submit" class="btn">Entrar</button>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="controls">
+                 <li class="nav-item">
+                <a href="/cliente"class="btn btn-success" data-toggle="modal"><i class="material-icons"></i> <span>Cancelar</span></a>
+                <br>
+                <br>
+              </li>
+                <li class="nav-item">
+                <a href="/ "class="btn btn-success" data-toggle="modal"><i class="material-icons"></i> <span>Cerrar Sesión</span></a>
+              </li>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
             <!-- end signin modal -->
-            <!-- Reset Modal -->
-            <div id="myReset" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="myResetModalLabel" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 id="myResetModalLabel">Recupera tu <strong>contraseña</strong></h4>
-              </div>
-              <div class="modal-body">
-                <form class="form-horizontal">
-                  <div class="control-group">
-                    <label class="control-label" for="inputResetEmail">Email</label>
-                    <div class="controls">
-                      <input type="text" id="inputResetEmail" placeholder="Email">
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <div class="controls">
-                      <button type="submit" class="btn">Reset password</button>
-                    </div>
-                    <p class="aligncenter margintop20">
-                      We will send instructions on how to reset your password to your inbox
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <!-- end reset modal -->
+          
           </div>
         </div>
         <div class="row">
@@ -171,16 +114,13 @@
                 <nav>
                   <ul class="nav topnav">
                     <li class="dropdown active">
-                      <a href="/">Inicio <i class="icon-angle-down"></i></a>
                     </li>
                     <li class="dropdown">
                       <a href="#"> <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">
-                        <li><a href="catalogo.html.html">Consultar productos</a></li>
+                        <li><a href="/catalogo">Catalogo</a></li>
                         <li><a href="table.html">Realizar pedidos</a></li>
-                        <li><a href="components.html">C</a></li>
                         <li><a href="animations.html">Consultar pedidos</a></li>
-                        <li><a href="icons.html">Categoria4</a></li>
                         <li><a href="icon-variations.html">Modificar pedidos</a></li>
                         <li class="dropdown"><a href="#">Eliminar pedidos<i class="icon-angle-right"></i></a>
                           <ul class="dropdown-menu sub-menu-level1">
@@ -207,11 +147,11 @@
       <div id="nivo-slider">
         <div class="nivo-slider">
           <!-- Slide #1 image -->
-          <img src="{{ url_for('static', filename='img/slides/nivo/mapa_conflictos-1900x600.jpg') }}" alt="" title="#caption-1" />
+          <img src="{{ url_for('static', filename='img/slides/nivo/oncologia.jpg') }}" alt="" title="#caption-1" />
           <!-- Slide #2 image -->
-          <img src="{{ url_for('static', filename='img/slides/nivo/scale-apple-1900x600.jpg') }}" alt="" title="#caption-2" />
+          <img src="{{ url_for('static', filename='img/slides/nivo/cora.jpg') }}" alt="" title="#caption-2" />
           <!-- Slide #3 image -->
-          <img src="{{ url_for('static',filename='img/slides/nivo/supplements-1900x600.jpg') }}" alt="" title="#caption-3" />
+          <img src="{{ url_for('static',filename='img/slides/nivo/pastilla.jpg') }}" alt="" title="#caption-3" />
         </div>
         <div class="container">
           <div class="row">
@@ -219,9 +159,9 @@
               <!-- Slide #1 caption -->
               <div class="nivo-caption" id="caption-1">
                 <div>
-                  <h2>Ofrecemos distribución a 4 estados  <strong>diferentes</strong></h2>
+                  <h2>Contamos con muchas <strong>promociones</strong></h2>
                   <p>
-                    Nuesta empresa distribuidora de medicamento
+                    Checa nuestro catálogo de medicamentos
                   </p>
 
                 </div>
@@ -229,9 +169,9 @@
               <!-- Slide #2 caption -->
               <div class="nivo-caption" id="caption-2">
                 <div>
-                  <h2>Medicamento con  <strong>certificación de calidad</strong></h2>
+                  <h2>Aqui podras encontrar los mejores <strong>precios</strong></h2>
                   <p>
-                    Nuestra empresa se encarga unicamente de la distribución de medicamentos de calidad
+                    Medicamentos de calidad
                   </p>
 
                 </div>
@@ -239,9 +179,9 @@
               <!-- Slide #3 caption -->
               <div class="nivo-caption" id="caption-3">
                 <div>
-                  <h2>Sólo por <strong>mayoreo</strong></h2>
+                  <h2>Descuentos de hasta del <strong>50%</strong></h2>
                   <p>
-                    Poner descripción de algo de mayoreo.
+                    No dudes en hacer tu pedido
                   </p>
 
                 </div>
@@ -302,90 +242,58 @@
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The City" href="img/works/full/">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Entregas" href="{{ url_for('static', filename='img/works/full/paquete.jpg') }}">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                    <img src="{{ url_for('static', filename='img/works/thumbs/paquete2.jpg') }}" alt="Nos encargamos de que tu paquete llegue intacto hasta tu establecimiento">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 design" data-id="id-1" data-type="icon">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Office" href="img/works/full/">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Medicamentos" href="{{ url_for('static', filename='img/works/full/medicinas.jpg') }}">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                    <img src="{{ url_for('static', filename='img/works/thumbs/medicinas2.jpg') }}" alt="Medicamentos de calidad a un buen precio">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="img/works/full/farmacia1.jpg">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Variedad" href="{{ url_for('static', filename='img/works/full/inyec.jpg') }}">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                  <!-- Imagen chica-->  <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                  <!-- Imagen chica-->  <img src="{{ url_for('static', filename='img/works/thumbs/inyec2.jpg') }}" alt="Busca en nuestro catálogo, contamos con diferentes productos">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
+                  <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrato">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="img/works/full/image-04-full.jpg">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Seguridad" href="{{ url_for('static', filename='img/works/full/seguridad.jpg') }}">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega.">
+                    <img src="{{ url_for('static', filename='img/works/thumbs/seguridad2.jpg') }}" alt="Nos encargamos de que los medicamentos no caigan en manos equivocadas">
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 photography" data-id="id-4" data-type="web">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Sea" href="{{ url_for('static', filename='img/works/full/image-05-full.jpg') }}">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/image-05.jpg') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
-                  </li>
+                  
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 photography" data-id="id-5" data-type="icon">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Clouds" href="img/works/full/image-06-full.jpg">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/') }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
-                  </li>
+                
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="{{ url_for('static', filename='img/works/full/image-07-full.jpg') }}">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/image-07.jpg') }}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
+                  
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Dark" href="{{ url_for('static', filename='img/works/full/image-08-full.jpg') }}">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/image-08.jpg') }}" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
+                  
                   <!-- End Item Project -->
                 </ul>
               </section>
