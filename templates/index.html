@@ -170,24 +170,6 @@
                     <li class="dropdown active">
                       <a href="/">Inicio <i class="icon-angle-down"></i></a>
                     </li>
-                    <li class="dropdown">
-                      <a href="#"> <i class="icon-angle-down"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="typography.html">General</a></li>
-                        <li><a href="table.html">Categoria1</a></li>
-                        <li><a href="components.html">Categoria2</a></li>
-                        <li><a href="animations.html">Categoria3</a></li>
-                        <li><a href="icons.html">Categoria4</a></li>
-                        <li><a href="icon-variations.html">Categoria5</a></li>
-                        <li class="dropdown"><a href="#">Categoria6 <i class="icon-angle-right"></i></a>
-                          <ul class="dropdown-menu sub-menu-level1">
-                            <li><a href="index.html">Nivo slider</a></li>
-                            <li><a href="index-alt2.html">Slit slider</a></li>
-                            <li><a href="index-alt3.html">Parallax slider</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
                   </ul>
                 </nav>
               </div>
@@ -299,7 +281,7 @@
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The City" href="img/works/full/">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The City" href="{{ url_for('static', filename='img/works/full/farmacia1.jpg') }}">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
