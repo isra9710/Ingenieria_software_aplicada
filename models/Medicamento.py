@@ -2,10 +2,17 @@ from sqlalchemy.orm import relationship
 from models.shared import db
 
 
+<<<<<<< HEAD:models/ProductoInventario.py
+class ProductoInventario(db.Model):
+    __tablename__ = "ProductoInventario"
+    idProducto_inventario = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(50))
+=======
 class Medicamento(db.Model):
     __tablename__ = "Medicamento"
     idMedicamento = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(45), unique=True)
+>>>>>>> origin/master:models/Medicamento.py
     cantidad = db.Column(db.Integer)
     porcion = db.Column(db.Float)
     descripcion = db.Column(db.String(250))
@@ -14,7 +21,11 @@ class Medicamento(db.Model):
     idProveedor = db.Column('idProveedor', db.Integer, db.ForeignKey("Proveedor.idProveedor"))
     idUsuario = db.Column('idUsuario', db.Integer, db.ForeignKey("Usuario.idUsuario"))
     precio = db.Column(db.Float)
+<<<<<<< HEAD:models/ProductoInventario.py
+    imagen = db.Column(db.String(200))
+=======
     imagen = db.Column(db.String(300))
+>>>>>>> origin/master:models/Medicamento.py
     detallePedido = relationship("DetallePedido", backref="Producto_inventario")
 
     def __init__(self, idProveedor, idUsuario, nombre, cantidad, porcion, descripcion, fecha_elaboracion, fecha_vencimiento, precio, imagen):
