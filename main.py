@@ -271,7 +271,7 @@ def prueba():
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
-    app.debug = True
+    db.init_app(app)
     with app.app_context():
         db.create_all()
     app.run()
