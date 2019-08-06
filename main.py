@@ -157,7 +157,7 @@ def agregarEmpleado():
         return mostrarEmpleados()
 
 
-@app.route("/llenareditarEmpleado/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
+@app.route("/llenareditarEmpleado/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos solicitados
 def llenareditarEmpleado(id):
     empleado = Usuario.query.filter_by(idUsuario=id).first()
     estadoO = Estado.query.filter_by(idEstado=empleado.idEstado).first()
