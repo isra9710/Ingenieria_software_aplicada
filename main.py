@@ -263,9 +263,9 @@ def validarNombreP(nombreO, nombreN):
 #Aqui terminan los CRUD
 
 
-@app.route("/prueba")
+@app.route("/catalogo")
 def prueba():
-    return render_template("index.html")
+    return render_template("cliente/catalogo.html")
 
 
 if __name__ == '__main__':
