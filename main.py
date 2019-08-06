@@ -11,6 +11,14 @@ from models.shared import db#se importa el objeto de SQLAlchemy para tenerlo en 
 def index():
     return render_template("index.html")
 
+@app.route("/catalogo")
+def catalogo():
+    return render_template("catalogo.html")
+
+@app.route("/catalogo2")
+def catalogo2():
+    return render_template("catalogo2.html")
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
