@@ -1,8 +1,4 @@
 from flask import Flask, render_template, request, session, flash, redirect, url_for
-
-
-from sqlalchemy import or_, and_
-
 import os
 app = Flask(__name__)
 SECRET_KEY = "my_secret_key"
@@ -266,16 +262,12 @@ def validarNombreP(nombreO, nombreN):
             return True
 #Aqui terminan los CRUD
 
-###Aqui prueba para git###
-####prueba 3####
 
-
-
-
-
-@app.route("/prueba")
+@app.route("/catalogo")
 def prueba():
-    return render_template("index.html")
+    return render_template("cliente/catalogo.html")
+
+
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
@@ -283,3 +275,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run()
+
