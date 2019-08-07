@@ -9,7 +9,7 @@ class DetallePedido(db.Model):
     idPedido = db.Column('idPedido', db.Integer, db.ForeignKey("Pedido.idPedido"))
     idProducto_inventario = db.Column('idMedicamento', db.Integer, db.ForeignKey("Medicamento.idMedicamento"))
 
-    def __init__(self, idPedido, idProducto_inventario):
+    def __init__(self, idPedido, idMedicamento):
         self.idPedido = idPedido
         self.idProducto_inventario = idProducto_inventario
         self.idProducto_inventario = idProducto_inventario
