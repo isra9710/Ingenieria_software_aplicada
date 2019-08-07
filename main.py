@@ -19,11 +19,11 @@ def login():
     if usuario:
         if usuario.contra == request.form.get("contra"):
             if usuario.tipo == "Administrador":
-                return render_template("admin.html")
+                return render_template("administrador/admin.html")
             elif usuario.tipo == "Empleado":
-                return render_template("empleado.html")
+                return render_template("empleado/empleado.html")
             else:
-                return render_template("cliente.html")
+                return render_template("cliente/cliente.html")
         else:
             return render_template("index.html")
 
@@ -49,7 +49,7 @@ def administrador():
 
 #Aqui empiezan los CRUD#
 @app.route("/mostrarMedicamentos")
-def mostarMedicamentos():
+def mostrarMedicamentos():
     medicamentos = Medicamento.query.all()
     administradores = Usuario.query.filter_by(tipo="Administrador")
     proveedores = Proveedor.query.all()
@@ -67,18 +67,18 @@ def agregarMedicamento():
         medicamento = Medicamento.query.filter_by(nombre=request.form["nombre"]).first()
     else:
         flash("No seleccionaste empleado o proveedor, no se agrego el medicamento")
-        return mostarMedicamentos()
+        return redirect((url_for('mostrarMedicamentos')))
     if medicamento is not None and request.form.get("nombre") == medicamento.nombre:
         flash("Ese medicamento ya existe!")
-        return mostarMedicamentos()
+        return redirect((url_for('mostrarMedicamentos')))
     else:
         administrador = Usuario.query.filter_by(nombre=request.form["emple"]).first()
         proveedor = Proveedor.query.filter_by(nombre=request.form["proveedor"]).first()
-        medicamento = Medicamento(proveedor.idProveedor, administrador.idUsuario, request.form.get("nombre"),request.form.get("cantidad"), request.form.get("porcion"), request.form.get("descripcion"), request.form.get("fechaE"), request.form.get("fechaV"), request.form.get("precio"), f.filename)
+        medicamento = Medicamento(proveedor.idProveedor, administrador.idUsuario, request.form.get("nombre"), request.form.get("cantidad"), request.form.get("porcion"), request.form.get("descripcion"), request.form.get("fechaE"), request.form.get("fechaV"), request.form.get("precio"), f.filename)
         flash("Se agrego medicamento con exito")
         db.session.add(medicamento)
         db.session.commit()
-        return mostarMedicamentos()
+        return redirect((url_for('mostrarMedicamentos')))
 
 
 @app.route("/llenareditar/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
@@ -91,27 +91,30 @@ def llenareditar(id):
     return render_template("administrador/editarMedicamentos.html", medicamento=medicamento, empleado=empleado, empleados=empleados, proveedor=proveedor, proveedores=proveedores)
 
 
-@app.route("/editarMedicamento")
+@app.route("/editarMedicamento", methods=['GET', 'POST'])
 def editarMedicamento():
-    medicaO = Medicamento.query.filter_by(idMedicamento=id).first()
-    string ="hola"
-    f = request.files['file']
-    folder = os.path.realpath(__file__).replace('\\', '/').split('/')[0:-1]
-    f.save('/'.join(folder) + '/static/' + f.filename)
-    if request.form.get("file") is None:
-        string = medicaO.imagen
+    medicaO = Medicamento.query.filter_by(idMedicamento=request.form['idMedicamento']).first()
+    proveedor = Proveedor.query.filter_by(nombre=request.form["proveedor"]).first()
+    usuario = Usuario.query.filter_by(nombre=request.form["usuario"]).first()
+    if validarNombreM(medicaO.nombre, request.form['nombre']):
+        medicaO.idProveedor = proveedor.idProveedor
+        medicaO.idUsuario = usuario.idUsuario
+        medicaO.nombre = request.form['nombre']
+        medicaO.cantidad = request.form['cantidad']
+        medicaO.porcion = request.form['porcion']
+        medicaO.descripcion = request.form['descripcion']
+        medicaO.fechaE = request.form['fechaE']
+        medicaO.fechaV = request.form['FechaV']
+        db.commit()
+        flash("Medicamento editado con exito")
+        return redirect((url_for('mostrarMedicamentos')))
     else:
-        string = f.filename
-    medicaO.imagen = string
-    proveedor = Proveedor.query.filter_by(idProveedor=request.form["proveedor"])
-    usuario = Usuario.query.filter_by(idUsuario=request.form["usuario"])
-    if medicaO.nombre != request.form.get("nombre"):
-        medicaAux = Medicamento.query.filter_by(idMedicamento=medicaO.idMedicamento).first()
-
-    return mostarMedicamentos()
+        flash("Ocurrio un problema al editar")
+        return redirect((url_for('mostrarMedicamentos')))
 
 
-def validarNombreM(nombreO,nombreN):
+
+def validarNombreM(nombreO, nombreN):
     medicamentoO = Medicamento.query.filter_by(nombre=nombreO).first()
     if nombreO == nombreN:
         return True
@@ -129,7 +132,7 @@ def eliminarMedicamento(id):
     db.session.delete(medica)
     db.session.commit()
     flash("Medicamento eliminado con exito")
-    return mostarMedicamentos()
+    return redirect((url_for('mostrarMedicamentos')))
 
 
 @app.route('/mostrarEmpleados')
@@ -144,17 +147,17 @@ def agregarEmpleado():
     usuario = Usuario.query.filter_by(nombre=request.form['nombre']).all()
     if usuario:
         flash("Ese usuario ya existe")
-        return mostrarEmpleados()
+        return redirect((url_for('mostrarEmpleados')))
     elif request.form['estado'] is not None:
         estado = Estado.query.filter_by(nombreEstado=request.form['estado']).first()
         empleado = Usuario(request.form['nombre'], request.form['contra'], "Empleado", estado.idEstado)
         db.session.add(empleado)
         db.session.commit()
         flash("Usuario registrado correctamente, pidale al mismo que cambie su contraseña")
-        return mostrarEmpleados()
+        return redirect((url_for('mostrarEmpleados')))
     else:
         flash("Ingresaste un dato erroneo")
-        return mostrarEmpleados()
+        return redirect((url_for('mostrarEmpleados')))
 
 
 @app.route("/llenareditarEmpleado/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos solicitados
@@ -171,15 +174,15 @@ def editarEmpleado():
     usuario = Usuario.query.filter_by(idUsuario=request.form["idUsuario"]).first()
     estado = Estado.query.filter_by(nombreEstado=request.form['estado']).first()
     if validarNombreU(usuario.nombre, request.form['nombre']) is True:
-        usuario.nombre=request.form['nombre']
-        usuario.idEstado=estado.idEstado
-        usuario.contra=request.form['contra']
+        usuario.nombre = request.form['nombre']
+        usuario.idEstado = estado.idEstado
+        usuario.contra = request.form['contra']
         db.session.commit()
         flash("Empleado editado")
-        return mostrarEmpleados()
+        return redirect((url_for('mostrarEmpleados')))
     else:
         flash("Ocurrio un error, quiza el nombre que editaste ya existe o ingresaste algun otro dato erroneo")
-        return mostrarEmpleados()
+        return redirect((url_for('mostrarEmpleados')))
 
 
 def validarNombreU(nombreO,nombreN):
@@ -200,7 +203,7 @@ def eliminarEmpleado(id):
     db.session.delete(empleado)
     db.session.commit()
     flash("Empleado eliminado con exito")
-    return mostrarEmpleados()
+    return redirect((url_for('mostrarEmpleados')))
 
 
 @app.route('/mostrarProveedores')
@@ -214,18 +217,18 @@ def agregarProveedor():
     pro = Proveedor.query.filter_by(nombre=request.form['nombre']).all()
     if pro:
         flash("Ese proveedor ya esta registrado con nosotros")
-        return mostrarProveedores()
+        return redirect((url_for('mostrarProveedores')))
     pro = Proveedor.query.filter_by(rfc=request.form['rfc'])
     clien = Cliente.query.filter_by(rfc=request.form['rfc'])
     if pro or clien:
         flash("Ese rfc ya se encuentra registrado")
-        return mostrarProveedores()
+        return redirect((url_for('mostrarProveedores')))
     else:
         proveedor = Proveedor(request.form.get["nombre"], request.form.get["rfc"], request.form.get["tel"])
         db.session.add(proveedor)
         db.session.commit()
         flash("Proveedor registrado correctamente")
-        return mostrarProveedores()
+        return redirect((url_for('mostrarProveedores')))
 
 
 @app.route("/llenareditarProveedor/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
@@ -239,15 +242,15 @@ def editarProveedor():
     usuario = Usuario.query.filter_by(idUsuario=request.form["idUsuario"]).first()
     estado = Estado.query.filter_by(nombreEstado=request.form['estado']).first()
     if validarNombreU(usuario.nombre, request.form['nombre']) is True:
-        usuario.nombre=request.form['nombre']
-        usuario.idEstado=estado.idEstado
-        usuario.contra=request.form['contra']
+        usuario.nombre = request.form['nombre']
+        usuario.idEstado = estado.idEstado
+        usuario.contra = request.form['contra']
         db.session.commit()
         flash("Empleado editado")
-        return mostrarEmpleados()
+        return redirect((url_for('mostrarProveedores')))
     else:
         flash("Ocurrio un error, quiza el nombre que editaste ya existe o ingresaste algun otro dato erroneo")
-        return mostrarEmpleados()
+        return redirect((url_for('mostrarProveedores')))
 
 
 def validarNombreP(nombreO, nombreN):

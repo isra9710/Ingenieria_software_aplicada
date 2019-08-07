@@ -32,7 +32,7 @@
 			    <label for="inputPassword" class="col-sm-2 col-form-label">ID medicamento:</label>
 			    <div class="col-sm-10">
 
-			      <input type="text" readonly value={{medicamento.idProducto_inventario}} class="form-control" name="idMedicamento" required >
+			      <input type="text" readonly value={{medicamento.idMedicamento}} class="form-control" name="idMedicamento" required >
 
 			    </div>
 			  </div>
@@ -41,7 +41,7 @@
 			    <div class="col-sm-10">
 
 			     <select name="proveedor" required>
-                            <option value={{proveedor.nombre}} selected="selected">{{ proveedor.nombre }}</option>
+                            <option value={{proveedor.nombre}} >{{ proveedor.nombre }}</option>
                             {% for prove in proveedores %}
 					 			{% if prove.nombre != proveedor.nombre %}
                                 <option>{{ prove.nombre }}</option>
@@ -55,7 +55,7 @@
 			    <label for="inputPassword" class="col-sm-2 col-form-label">Usuario:</label>
 			    <div class="col-sm-10">
 					<select name="usuario" required>
-					 <option value={{empleado.nombre}} selected="selected">{{ empleado.nombre }}</option>
+					 <option value={{empleado.nombre}} >{{ empleado.nombre }}</option>
 					{% for emple in empleados %}
 						{% if emple.nombre != empleado.nombre %}
 			     		 <option>{{emple.nombre}}</option>
@@ -100,21 +100,19 @@
 			<div class="form-group row">
 			    <label for="inputPassword" class="col-sm-2 col-form-label">Fecha Elaboracion:</label>
 			    <div class="col-sm-10">
-					<input type="date"  value="{{medicamento.fecha_elaboracion}}" name="fechaE" min="2019-04-01" max="2050-04-20" required>
+					<input type="date"  value="{{medicamento.fechaE}}" name="fechaE" min="2019-04-01" max="2050-04-20" required>
 			    </div>
 			  </div>
 					<div class="form-group row">
 			    <label for="inputPassword" class="col-sm-2 col-form-label">Fecha Elaboracion:</label>
 			    <div class="col-sm-10">
-					<input type="date"  value="{{medicamento.fecha_vencimiento}}" name="fechaV" min="2021-04-01" max="2050-04-20" required>
+					<input type="date"  value="{{medicamento.fechaV}}" name="fechaV" min="2021-04-01" max="2050-04-20" required>
 			    </div>
 			  </div>
-			</div>
     						<div class="form-group">
     							<label>Imagen medicamento</label>
-    							<input type="file" name="file" >
+    							<input type="file" value="{{medicamento.imagen}}" name="file" >
     						</div>
-			</div>
 
 									<div class="modal-footer">
 										<a class="btn btn-primary" href="/mostrarMedicamentos" role="button">Cancelar</a>

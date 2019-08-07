@@ -6,7 +6,7 @@ class DetallePedido(db.Model):
     idDetallePedido = db.Column(db.Integer, primary_key=True)
     cantidad = db.Column(db.Integer)
     idPedido = db.Column('idPedido', db.Integer, db.ForeignKey("Pedido.idPedido"))
-    subTotal = db.Column(db.float)
+    subTotal = db.Column(db.Float)
     idMedicamento = db.Column('idMedicamento', db.Integer, db.ForeignKey("Medicamento.idMedicamento"))
 
     def __init__(self, idPedido, idMedicamento):
