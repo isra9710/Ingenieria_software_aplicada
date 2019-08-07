@@ -1,6 +1,5 @@
 from sqlalchemy.orm import relationship
 from models.shared import db
-#db = SQLAlchemy()
 
 
 class Pedido(db.Model):
