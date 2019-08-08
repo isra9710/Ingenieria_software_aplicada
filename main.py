@@ -393,9 +393,11 @@ def eliminarPedido(id):
     consulta = DetallePedido.query.filter_by(idPedido=id)
     pedido = Pedido.query.filter_by(idPedido=id).first()
     for e in consulta:
-        medicamento = Medicamento.query.filter_by(nombre=e.nombreMedicamento)
+        medicamento = Medicamento.query.filter_by(nombre=e.nombreMedicamento).first()
         medicamento.cantidad = medicamento.cantidad + e.cantidad
         db.session.commit()
+    db.session.delete(pedido)
+    db.session.commit()
     flash("Eliminado con éxito")
     return redirect(url_for('mostrarPedidos'))
 
