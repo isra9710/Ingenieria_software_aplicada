@@ -15,7 +15,7 @@ class Medicamento(db.Model):
     idUsuario = db.Column('idUsuario', db.Integer, db.ForeignKey("Usuario.idUsuario"))
     precio = db.Column(db.Float)
     imagen = db.Column(db.String(300))
-    detallePedido = relationship("DetallePedido", backref="Producto_inventario")
+    detallePedido = relationship("DetallePedido", backref="Medicamento")
 
     def __init__(self, idProveedor, idUsuario, nombre, cantidad, porcion, descripcion, fechaE, fechaV, precio, imagen):
         self.idProveedor = idProveedor

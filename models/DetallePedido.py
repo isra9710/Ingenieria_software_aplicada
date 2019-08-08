@@ -8,10 +8,12 @@ class DetallePedido(db.Model):
     idPedido = db.Column('idPedido', db.Integer, db.ForeignKey("Pedido.idPedido"))
     subTotal = db.Column(db.Float)
     idMedicamento = db.Column('idMedicamento', db.Integer, db.ForeignKey("Medicamento.idMedicamento"))
+    nombreMedicamento = db.Column('nombre', db.String(45), db.ForeignKey("Medicamento.nombre"))
 
-    def __init__(self, idPedido, idMedicamento):
+    def __init__(self, idPedido, idMedicamento, nombreMedicamento):
         self.idPedido = idPedido
         self.idMedicamento = idMedicamento
+        self.nombreMedicamento = nombreMedicamento
 
     def __repr__(self):
         return ''

@@ -19,11 +19,14 @@ def login():
     if usuario:
         if usuario.contra == request.form.get("contra"):
             if usuario.tipo == "Administrador":
-                return render_template("administrador/admin.html")
+                session['username'] = request.form['usuario']
+                return redirect((url_for('administrador')))
             elif usuario.tipo == "Empleado":
-                return render_template("empleado/empleado.html")
+                session['username'] = request.form['usuario']
+                return redirect((url_for('empleado')))
             else:
-                return render_template("cliente/cliente.html")
+                session['username'] = request.form['usuario']
+                return redirect((url_for('cliente')))
         else:
             return render_template("index.html")
 
@@ -33,17 +36,17 @@ def login():
 #Inicio de las funciones de paginas principales de los 3 tipos de usuario, cliente, empleado, administrador#
 @app.route("/cliente")
 def cliente():
-    return "Esta es home"
+    return render_template("cliente/cliente.html")
 
 
 @app.route("/empleado")
 def empleado():
-    return"Este es el almacen"
+    return render_template("empleado/empleado.html")
 
 
 @app.route("/administrador")
 def administrador():
-    return render_template("Administrador.html")
+    return render_template("administrador/admin.html")
 #Fin de las funciones de paginas principales de los 3 tipos de usuario, cliente, empleado, administrador#
 
 
@@ -58,7 +61,6 @@ def mostrarMedicamentos():
 
 @app.route("/agregarMedicamento", methods=['GET', 'POST'])
 def agregarMedicamento():
-    #if "username" in session:
  if request.method == "POST":
     f = request.files['file']
     folder = os.path.realpath(__file__).replace('\\', '/').split('/')[0:-1]
@@ -93,25 +95,25 @@ def llenareditar(id):
 
 @app.route("/editarMedicamento", methods=['GET', 'POST'])
 def editarMedicamento():
-    medicaO = Medicamento.query.filter_by(idMedicamento=request.form['idMedicamento']).first()
-    proveedor = Proveedor.query.filter_by(nombre=request.form["proveedor"]).first()
-    usuario = Usuario.query.filter_by(nombre=request.form["usuario"]).first()
-    if validarNombreM(medicaO.nombre, request.form['nombre']):
-        medicaO.idProveedor = proveedor.idProveedor
-        medicaO.idUsuario = usuario.idUsuario
-        medicaO.nombre = request.form['nombre']
-        medicaO.cantidad = request.form['cantidad']
-        medicaO.porcion = request.form['porcion']
-        medicaO.descripcion = request.form['descripcion']
-        medicaO.fechaE = request.form['fechaE']
-        medicaO.fechaV = request.form['FechaV']
-        db.commit()
-        flash("Medicamento editado con exito")
-        return redirect((url_for('mostrarMedicamentos')))
-    else:
-        flash("Ocurrio un problema al editar")
-        return redirect((url_for('mostrarMedicamentos')))
-
+    if request.method == "POST":
+        medicaO = Medicamento.query.filter_by(idMedicamento=request.form['idMedicamento']).first()
+        proveedor = Proveedor.query.filter_by(nombre=request.form["proveedor"]).first()
+        usuario = Usuario.query.filter_by(nombre=request.form["usuario"]).first()
+        if validarNombreM(medicaO.nombre, request.form['nombre']):
+            medicaO.idProveedor = proveedor.idProveedor
+            medicaO.idUsuario = usuario.idUsuario
+            medicaO.nombre = request.form['nombre']
+            medicaO.cantidad = request.form['cantidad']
+            medicaO.porcion = request.form['porcion']
+            medicaO.descripcion = request.form['descripcion']
+            medicaO.fechaE = request.form['fechaE']
+            medicaO.fechaV = request.form['FechaV']
+            db.commit()
+            flash("Medicamento editado con exito")
+            return redirect((url_for('mostrarMedicamentos')))
+        else:
+            flash("Ocurrio un problema al editar")
+            return redirect((url_for('mostrarMedicamentos')))
 
 
 def validarNombreM(nombreO, nombreN):
@@ -119,7 +121,7 @@ def validarNombreM(nombreO, nombreN):
     if nombreO == nombreN:
         return True
     else:
-        medicamentoN = Usuario.query.filter(Medicamento.id != medicamentoO.idUsuario, Medicamento.nombre == nombreN).all()
+        medicamentoN = Usuario.query.filter(Medicamento.idMedicamento != medicamentoO.idUsuario, Medicamento.nombre == nombreN).all()
         if medicamentoN:
             return False
         else:
@@ -263,12 +265,53 @@ def validarNombreP(nombreO, nombreN):
             return False
         else:
             return True
+
+@app.route('/eliminarProveedor/<string:id>', methods=['GET', 'POST'])
+def eliminarEmpleado(id):
+    proveedor= Proveedor.query.filter_by(idProveedor=id).first()
+    db.session.delete(proveedor)
+    db.session.commit()
+    flash("Empleado eliminado con exito")
+    return redirect((url_for('mostrarProveedores')))
 #Aqui terminan los CRUD
 
 
 @app.route("/catalogo")
 def prueba():
-    return render_template("cliente/catalogo.html")
+    medicamentos = Medicamento.query.all()
+    return render_template("cliente/catalogo.html", medicamentos=medicamentos)
+
+@app.route("/aniadirC/<string:id>")
+def aniadirC(id):
+    nombre = session['username']
+    usuario = Usuario.query.filter_by(nombre=nombre)
+    if 'carrito' not in session:
+        pedido = Pedido(usuario.idUsuario, 0.0)
+        db.session.add(pedido)
+        db.session.commit()
+        session['carrito'] = pedido.idPedido
+    idPedido = session['carrito']
+    medicamento = Medicamento.query.filter_by(idMedicamento=id).first()
+    subTotal = medicamento.precio*request.form.get('cantidad')
+    detalleP = DetallePedido(idPedido, id, subTotal)
+    db.session.add(detalleP)
+    db.session.commit()
+    consulta = DetallePedido.query.filterby(idPedido=idPedido)
+    return render_template("/cliente/carrito.html", consulta=consulta)
+
+
+@app.route("/eliminarC/<string:id>")
+def eliminarC(id):
+    idPedido = session['carrito']
+    detalleP = DetallePedido.query.filter(idPedido=idPedido, idMedicamento=id).first()
+    db.session.delete(detalleP)
+    db.session.commit()
+
+
+@app.route("/terminarC")
+def terminarC():
+    session.pop('carrito')
+    return redirect((url_for('cliente')))
 
 
 if __name__ == '__main__':

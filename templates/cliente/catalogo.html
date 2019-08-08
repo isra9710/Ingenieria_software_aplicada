@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -158,70 +157,36 @@
         </div>
  
         <!-- Portfolio Projects -->
+       <form method="POST" action="{{url_for('agregarEmpleado')}}" enctype="multipart/form-data">
         <div class="row">
           <div class="span12">
             <h4 class="heading">Catálogo de <strong>medicamentos</strong></h4>
+            {% for medicamento in medicamentos %}
             <div class="row">
               <section id="projects">
                 <ul id="thumbs" class="portfolio">
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Naproxeno 500mg" href="{{ url_for('static', filename='img/works/full/napro.jpeg') }}">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title={{medicamento.nombre}} href="{{ url_for('static', filename=medicamento.imagen) }}">
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
                     <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/napro2.jpeg') }}" alt="El naproxeno es un medicamento antinflamatorio no esteroideo que se emplea en el tratamiento del dolor leve a moderado">
+                    <img src="{{ url_for('static', filename=medicamento.imagen) }}" alt={{medicamento.descripcion}}>
                   </li>
+                  <button>Agregar</button>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 design" data-id="id-1" data-type="icon">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Medicamentos" href="{{ url_for('static', filename='img/works/full/lora.jpg') }}">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/lora2.jpg') }}" alt="Medicamentos de calidad a un buen precio">
-                  </li>
-                  <!-- End Item Project -->
-                  <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrator">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Variedad" href="{{ url_for('static', filename='img/works/full/tab.jpg') }}">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                  <!-- Imagen chica-->  <img src="{{ url_for('static', filename='img/works/thumbs/tab2.jpg') }}" alt="Busca en nuestro catálogo, contamos con diferentes productos">
-                  </li>
-                  <!-- End Item Project -->
-                  <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrato">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Seguridad" href="{{ url_for('static', filename='img/works/full/ade.jpg') }}">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/ade2.jpg') }}" alt="Nos encargamos de que los medicamentos no caigan en manos equivocadas">
-                  </li>
-                  <li class="item-thumbs span3 photography" data-id="id-2" data-type="illustrato">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Pepto-bismol" href="{{ url_for('static', filename='img/works/full/pepto.jpg') }}">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="{{ url_for('static', filename='img/works/thumbs/pepto2.jpg') }}" alt="Medicamento usado para el tratamiento de la indigestión y el malestar estomacal">
-                  </li>
+
 
                 </ul>
               </section>
             </div>
+            {% endfor %}
           </div>
         </div>
+       </form>
         <!-- End Portfolio Projects -->
         <!-- divider -->
         <div class="row">
