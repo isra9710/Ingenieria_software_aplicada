@@ -283,7 +283,7 @@
 
     </head>
 
-    <header>
+   <header>
 
 
     		<!---------------------------------BARRA2---------------------------------------->
@@ -304,30 +304,24 @@
     				<!-- La etiqueta <li> se usa en listas ordenadas ( <ol> ), listas desordenadas ( <ul> ) y en listas de menú -->
     				<ul class="navbar-nav">
 
+
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/admin"> Home</a>
-    					</li>
-    					<li class="nav-item">
-    					<!-- link -->
-    						<a class="nav-link" href="/"> Una opcion</a>
+    						<a class="nav-link" href="/mostrarPedidos"> Gestión de Pedidos</a>
     					</li>
 
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/"> Otra opcion</a>
+    						<a class="nav-link" href="/mostrarProveedores"> Gestión proveedores</a>
     					</li>
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/mostrarMedicamentos"> Gestor de medicamentos</a>
-    					</li>
-    					<li class="nav-item">
-    					<!-- link -->
-    						<a class="nav-link" href="/"> Otra opcion</a>
+    						<a class="nav-link" href="/mostrarMedicamentos"> Gestión de medicamentos</a>
     					</li>
 
+
     					<li class="nav-item">
-    						<a class="nav-link " href="/cerrarSesionAdmin"><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
+    						<a class="nav-link " href="/logout "><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
     					</li>
 
     				</ul>
@@ -339,12 +333,11 @@
 
 
 
-
-    <body>
+  <body>
     {% with messages= get_flashed_messages() %}
     	{% if messages %}
     		{% for meessage in messages %}
-    			<h3>{{ meessage }}</h3>
+    			<center><h3>{{ meessage }}</h3></center>
             {% endfor %}
     	{% endif %}
     {% endwith %}

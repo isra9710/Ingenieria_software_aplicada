@@ -29,6 +29,13 @@
 
 
 <body>
+{% with messages= get_flashed_messages() %}
+    	{% if messages %}
+    		{% for meessage in messages %}
+	<center><h3>{{ meessage }}</h3></center>
+            {% endfor %}
+    	{% endif %}
+    {% endwith %}
   <div id="wrapper">
     <!-- toggle top area -->
     <div class="hidden-top">
@@ -56,8 +63,12 @@
         <div class="row nomargin">
           <div class="span12">
             <div class="headnav">
-              <ul>
-                  <li><a href="#mySignin" data-toggle="modal"><i class="icon-user"></i>Cerrar sesión</a></li>
+                 <ul>
+                 <li> <a href="/cliente" data-toggle="modal"><i class="icon-angle-down"></i>Inicio</a> </li>
+                <li> <a href="/carrito" data-toggle="modal"><i class="icon-angle-down"></i>Carrito</a> </li>
+                <li> <a href="/mostrarPedidos" data-toggle="modal"><i class="icon-angle-down"></i>Pedidos</a> </li>
+                <li><a href="/logout" data-toggle="modal"><i class="icon-user"></i>Cerrar sesión</a></li>
+
               </ul>
             </div>
             <!-- Signup Modal -->
@@ -119,14 +130,8 @@
                       <a href="#"> <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">
                         <li><a href="/catalogo">Catalogo</a></li>
-                        <li><a href="table.html">Realizar pedidos</a></li>
-                        <li><a href="animations.html">Consultar pedidos</a></li>
-                        <li><a href="icon-variations.html">Modificar pedidos</a></li>
-                        <li class="dropdown"><a href="#">Eliminar pedidos<i class="icon-angle-right"></i></a>
+                        <li><a href="/pedidos">Consultar pedidos</a></li>
                           <ul class="dropdown-menu sub-menu-level1">
-                            <li><a href="index.html">Nivo slider</a></li>
-                            <li><a href="index-alt2.html">Slit slider</a></li>
-                            <li><a href="index-alt3.html">Parallax slider</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -389,6 +394,6 @@
 
   <script src="{{ url_for('static',filename='js/custom.js') }}"></script>
 </head>
-<body>
+
 </body>
 </html>

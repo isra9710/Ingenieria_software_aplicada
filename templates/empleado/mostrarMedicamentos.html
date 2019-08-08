@@ -283,7 +283,7 @@
 
     </head>
 
-    <header>
+      <header>
 
 
     		<!---------------------------------BARRA2---------------------------------------->
@@ -304,30 +304,23 @@
     				<!-- La etiqueta <li> se usa en listas ordenadas ( <ol> ), listas desordenadas ( <ul> ) y en listas de menú -->
     				<ul class="navbar-nav">
 
+
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/admin"> Home</a>
-    					</li>
-    					<li class="nav-item">
-    					<!-- link -->
-    						<a class="nav-link" href="/"> Una opcion</a>
+    						<a class="nav-link" href="/mostrarPedidos"> Gestión de Pedidos</a>
     					</li>
 
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/"> Otra opcion</a>
+    						<a class="nav-link" href="/mostrarProveedores"> Gestión proveedores</a>
     					</li>
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/mostrarMedicamentos"> Gestor de medicamentos</a>
-    					</li>
-    					<li class="nav-item">
-    					<!-- link -->
-    						<a class="nav-link" href="/"> Otra opcion</a>
+    						<a class="nav-link" href="/mostrarMedicamentos"> Gestión de medicamentos</a>
     					</li>
 
     					<li class="nav-item">
-    						<a class="nav-link " href="/cerrarSesionAdmin"><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
+    						<a class="nav-link " href="/logout "><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
     					</li>
 
     				</ul>
@@ -339,12 +332,11 @@
 
 
 
-
     <body>
     {% with messages= get_flashed_messages() %}
     	{% if messages %}
     		{% for meessage in messages %}
-    			<h3>{{ meessage }}</h3>
+    			<center><h3>{{ meessage }}</h3></center>
             {% endfor %}
     	{% endif %}
     {% endwith %}
@@ -390,141 +382,30 @@
 
     							</span>
     						</td>
-                            <td>{{ medicamento.idProducto_inventario }}</td>
+                            <td>{{ medicamento.idMedicamento }}</td>
                             <td>{{ medicamento.idUsuario }}</td>
     						<td>{{ medicamento.idProveedor }}</td>
     						<td>{{ medicamento.nombre }}</td>
     						<td>{{ medicamento.cantidad }}</td>
     						<td>{{ medicamento.porcion }}</td>
     						<td>{{ medicamento.descripcion }}</td>
-    						<td>{{ medicamento.fecha_elaboracion }}</td>
-                            <td>{{ medicamento.fecha_vencimiento }}</td>
+    						<td>{{ medicamento.fechaE }}</td>
+                            <td>{{ medicamento.fechaV }}</td>
     						<td>{{ medicamento.precio }}</td>
     						<td>
-								<style type="text/css">
-body {font-family: Arial, Helvetica, sans-serif;}
-
-#myImg {
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#myImg:hover {opacity: 0.7;}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
-
-/* Modal Content (image) */
-.modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-}
-
-/* Caption of Modal Image */
-#caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
-}
-
-/* Add Animation */
-.modal-content, #caption {
-  -webkit-animation-name: zoom;
-  -webkit-animation-duration: 0.6s;
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-
-@-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)}
-  to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-  from {transform:scale(0)}
-  to {transform:scale(1)}
-}
-
-/* The Close Button */
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-  .modal-content {
-    width: 100%;
-  }
-}
-</style>
-								<img id="myImg" src="{{ url_for('static', filename=medicamento.imagen) }}" alt=medicamento.nombre style="width:100%;max-width:300px">
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="img01">
-  <div id="caption"></div>
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById("myImg");
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
-}
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-</script>
+								<li class="item-thumbs span3 photography" data-id="id-5" data-type="icon">
+                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Clouds" href="{{ url_for('static', filename=medicamento.imagen) }}">
+						<span class="overlay-img"></span>
+						<span class="overlay-img-thumb font-icon-plus"></span>
+						</a>
+                    <!-- Thumb Image and Description -->
+                    <img src="{{ url_for('static', filename=medicamento.imagen) }}" alt="Podríamos poner descripcion de imagenes o de lugares de entrega">
+                  </li>
 </td>
 							<td>
-                                <a href="/llenareditar/{{ medicamento.idProducto_inventario }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="/eliminarMedicamento/{{ medicamento.idProducto_inventario }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="/llenareditar/{{ medicamento.idMedicamento }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="/eliminarMedicamento/{{ medicamento.idMedicamento }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
     {% endfor %}
@@ -544,16 +425,7 @@ span.onclick = function() {
     					</div>
     					<div class="modal-body">
     						<div class="form-group">
-    							<label>ID Empleado</label>
-    							<select name="emple" required>
-                            <option value="novalido" selected disabled hidden>Selecciona un empleado</option>
-                            {% for administrador in administradores %}
-                                <option>{{ administrador.nombre }}</option>
-                            {% endfor %}
-                        		</select>
-    						</div>
-    						<div class="form-group">
-    							<label>ID Proveedor</label>
+    							<label>Proveedor</label>
     							<select name="proveedor" required>
                             <option value="novalido"  selected disabled hidden>Selecciona un proveedor</option>
                             {% for proveedor in proveedores %}
@@ -624,3 +496,21 @@ span.onclick = function() {
 -->
     </body>
     </html>
+ <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jcarousel/jquery.jcarousel.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.fancybox.pack.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.fancybox-media.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/google-code-prettify/prettify.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/portfolio/jquery.quicksand.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/portfolio/setting.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.flexslider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.nivo.slider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/modernizr.custom.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.ba-cond.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.slitslider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+
+
+  <script src="{{ url_for('static',filename='js/custom.js') }}"></script>

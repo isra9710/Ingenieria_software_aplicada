@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Administrador</title>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Distribuye Salud</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <!-- css -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="{{ url_for ('static', filename='css/bootstrap.css') }}" rel="stylesheet" />
+  <link href="{{ url_for ('static', filename='css/bootstrap-responsive.css') }}" rel="stylesheet" />
+  <link href="{{ url_for ('static', filename='css/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+  <link href="{{ url_for ('static', filename='css/jcarousel.css') }}" rel="stylesheet" />
+  <link href="{{ url_for ('static', filename='css/flexslider.css') }}" rel="stylesheet" />
+  <link href="{{ url_for ('static', filename='css/style.css') }}" rel="stylesheet" />
+  <!-- Theme skin -->
+  <link href="{{ url_for ('static', filename='skins/default.css') }}" rel="stylesheet" />
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ url_for ('static', filename='ico/apple-touch-icon-144-precomposed.png') }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ url_for ('static', filename='ico/apple-touch-icon-114-precomposed.png') }}" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url_for ('static', filename='ico/apple-touch-icon-72-precomposed.png') }}" />
+  <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='ico/apple-touch-icon-57-precomposed.png') }}" />
+  <link rel="shortcut icon" href="{{ url_for ('static', filename='ico/favicon.png') }}" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}" />
@@ -15,7 +34,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     	<!---->
-    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
 
@@ -26,10 +45,9 @@
 
 
 
-    <!-- CSS de boostrap
-    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    --->
-    <style type="text/css">
+
+
+        <style type="text/css">
         body {
             color: #566787;
     		background: #f5f5f5;
@@ -302,21 +320,24 @@
 
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/GestionPedidios"> Gestión de Pedidos</a>
+    						<a class="nav-link" href="/mostrarPedidos"> Gestión de Pedidos</a>
     					</li>
 
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/mostrarProveedores"> Gestión Proveedores</a>
+    						<a class="nav-link" href="/mostrarProveedores"> Gestión proveedores</a>
     					</li>
     					<li class="nav-item">
     					<!-- link -->
     						<a class="nav-link" href="/mostrarMedicamentos"> Gestión de medicamentos</a>
     					</li>
-
+						<li class="nav-item">
+    					<!-- link -->
+    						<a class="nav-link" href="/mostrarEmpleados"> Gestión de empleados</a>
+    					</li>
 
     					<li class="nav-item">
-    						<a class="nav-link " href="/ "><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
+    						<a class="nav-link " href="/logout "><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
     					</li>
 
     				</ul>
@@ -329,11 +350,220 @@
 
 
 
-    	<!-- Delete Modal HTML -->
-    <!-- JAVASCRIP
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    --->
-    </body>
 
-    </html>
 
+
+
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <!-- toggle top area -->
+    <div class="hidden-top">
+      <div class="hidden-top-inner container">
+        <div class="row">
+          <div class="span12">
+            <ul>
+              <li><strong>Distribuimos a gran parte del país</strong></li>
+              <li>Oficina principal : MunicipioX, Morelos #X, Calle X</li>
+              <li>Por favor llama <i class="icon-phone"></i> (123) 456-7890 - (123) 555-7891</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end toggle top area -->
+    <!-- start header -->
+
+
+    <!-- end header -->
+    <section id="featured">
+      <!-- start slider -->
+      <!-- Slider -->
+      <div id="nivo-slider">
+        <div class="nivo-slider">
+          <!-- Slide #1 image -->
+          <img src="{{ url_for('static', filename='img/slides/nivo/brain-story-1900x600.jpg') }}" alt="" title="#caption-1" />
+          <!-- Slide #2 image -->
+          <img src="{{ url_for('static', filename='img/slides/nivo/pills-1900x600.jpg') }}" alt="" title="#caption-2" />
+          <!-- Slide #3 image -->
+          <img src="{{ url_for('static',filename='img/slides/nivo/formulas.jpg') }}" alt="" title="#caption-3" />
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="span12">
+              <!-- Slide #1 caption -->
+              <div class="nivo-caption" id="caption-1">
+                <div>
+                  <h2><strong>¡¡¡ </strong> Bienvenido  <strong> !!! </strong></h2>
+                  <p>
+                    ¿Nuevos productos por agregar?
+                  </p>
+
+                </div>
+              </div>
+              <!-- Slide #2 caption -->
+              <div class="nivo-caption" id="caption-2">
+                <div>
+                  <h2>Medicamento con  <strong>certificación de calidad</strong></h2>
+                  <p>
+                    Empleados de Claidad
+                  </p>
+
+                </div>
+              </div>
+              <!-- Slide #3 caption -->
+              <div class="nivo-caption" id="caption-3">
+                <div>
+                  <h2>Sólo por <strong>mayoreo</strong></h2>
+                  <p>
+                   No autorizar pedidos que esten por debajo de un pedido de 200 piezas en inventario
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end slider -->
+    </section>
+    <section class="callaction">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="big-cta">
+              <div class="cta-text">
+                <h3>Distibuye  <span class="highlight"><strong>Salud</strong></span></h3>
+              </div>
+              <div class="cta floatright">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="content">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="row">
+              <div class="span3">
+                <div class="box aligncenter">
+                  <div class="aligncenter icon">
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- divider -->
+        <div class="row">
+          <div class="span12">
+            <div class="solidline">
+            </div>
+          </div>
+        </div>
+        <!-- end divider -->
+        <!-- Portfolio Projects -->
+        <div class="row">
+          <div class="span12">
+            <h4 class="heading">Empleados de <strong>Calidad</strong></h4>
+
+          </div>
+        </div>
+        <!-- End Portfolio Projects -->
+        <!-- divider -->
+        <div class="row">
+          <div class="span12">
+            <div class="solidline">
+            </div>
+          </div>
+        </div>
+        <!-- end divider -->
+      </div>
+    </section>
+    <section id="bottom">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="aligncenter">
+              <div id="twitter-wrapper">
+                <div id="twitter">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="span3">
+            <div class="widget">
+              <h5 class="widgetheading">Datos Referenciales</h5>
+              <address>
+								<strong>Distribuye Salud</strong><br>
+								 MunicipioX, Morelos #X, Calle X<br>
+								 MunicipioX, Morelos #X, Calle X
+					 		</address>
+              <p>
+                <i class="icon-phone"></i> (123) 456-7890 - (123) 555-7891 <br>
+                <i class="icon-envelope-alt"></i> distribuyeSalud@salud.com
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="sub-footer">
+        <div class="container">
+          <div class="row">
+            <div class="span6">
+              <div class="copyright">
+                <p>
+                  <span>&copy; Distribuye Salud Todos los derechos reservados.</span>
+                </p>
+              </div>
+            </div>
+            <div class="span6">
+              <ul class="social-network">
+                <li><a href="#" data-placement="bottom" title="Facebook"><i class="icon-facebook icon-square"></i></a></li>
+                <li><a href="#" data-placement="bottom" title="Twitter"><i class="icon-twitter icon-square"></i></a></li>
+                <li><a href="#" data-placement="bottom" title="Linkedin"><i class="icon-linkedin icon-square"></i></a></li>
+                <li><a href="#" data-placement="bottom" title="Pinterest"><i class="icon-pinterest icon-square"></i></a></li>
+                <li><a href="#" data-placement="bottom" title="Google plus"><i class="icon-google-plus icon-square"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <a href="#" class="scrollup"><i class="icon-chevron-up icon-square icon-32 active"></i></a>
+
+  <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jcarousel/jquery.jcarousel.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.fancybox.pack.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.fancybox-media.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/google-code-prettify/prettify.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/portfolio/jquery.quicksand.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/portfolio/setting.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.flexslider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.nivo.slider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/modernizr.custom.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.ba-cond.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.slitslider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+
+
+  <script src="{{ url_for('static',filename='js/custom.js') }}"></script>
+
+</body>
+</html>

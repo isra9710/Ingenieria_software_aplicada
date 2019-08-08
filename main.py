@@ -33,6 +33,12 @@ def login():
     else:
         render_template("index.html")
 
+@app.route("/logout")
+def logout():
+    session.pop('username')
+    return render_template("index.html")
+
+
 #Inicio de las funciones de paginas principales de los 3 tipos de usuario, cliente, empleado, administrador#
 @app.route("/cliente")
 def cliente():
@@ -53,10 +59,19 @@ def administrador():
 #Aqui empiezan los CRUD#
 @app.route("/mostrarMedicamentos")
 def mostrarMedicamentos():
-    medicamentos = Medicamento.query.all()
-    administradores = Usuario.query.filter_by(tipo="Administrador")
-    proveedores = Proveedor.query.all()
-    return render_template("administrador/mostrarMedicamentos.html", medicamentos=medicamentos, administradores=administradores, proveedores=proveedores)
+    if 'username' in session:
+        nombre = session['username']
+        usuario = Usuario.query.filter_by(nombre=nombre).first()
+        medicamentos = Medicamento.query.all()
+        proveedores = Proveedor.query.all()
+        if usuario.tipo == "Administrador":
+            return render_template("administrador/mostrarMedicamentos.html", medicamentos=medicamentos, proveedores=proveedores)
+        else:
+            return render_template("empleado/mostrarMedicamentos.html", medicamentos=medicamentos,
+                                   proveedores=proveedores)
+    else:
+        flash("Inicia sesión por favor")
+        render_template("index.html")
 
 
 @app.route("/agregarMedicamento", methods=['GET', 'POST'])
@@ -65,19 +80,20 @@ def agregarMedicamento():
     f = request.files['file']
     folder = os.path.realpath(__file__).replace('\\', '/').split('/')[0:-1]
     f.save('/'.join(folder) + '/static/' + f.filename)
-    if request.form.get("nombre") is not None and request.form.get("emple") is not None and request.form.get("proveedor") is not None:
+    if request.form.get("nombre") is not None and request.form.get("proveedor") is not None:
         medicamento = Medicamento.query.filter_by(nombre=request.form["nombre"]).first()
     else:
-        flash("No seleccionaste empleado o proveedor, no se agrego el medicamento")
+        flash("No seleccionaste empleado o proveedor, no se agregó el medicamento")
         return redirect((url_for('mostrarMedicamentos')))
     if medicamento is not None and request.form.get("nombre") == medicamento.nombre:
-        flash("Ese medicamento ya existe!")
+        flash("Ese medicamento ya existe")
         return redirect((url_for('mostrarMedicamentos')))
     else:
-        administrador = Usuario.query.filter_by(nombre=request.form["emple"]).first()
+        nombre = session['username']
+        empleado = Usuario.query.filter_by(nombre=nombre).first()
         proveedor = Proveedor.query.filter_by(nombre=request.form["proveedor"]).first()
-        medicamento = Medicamento(proveedor.idProveedor, administrador.idUsuario, request.form.get("nombre"), request.form.get("cantidad"), request.form.get("porcion"), request.form.get("descripcion"), request.form.get("fechaE"), request.form.get("fechaV"), request.form.get("precio"), f.filename)
-        flash("Se agrego medicamento con exito")
+        medicamento = Medicamento(proveedor.idProveedor, empleado.idUsuario, request.form.get("nombre"), request.form.get("cantidad"), request.form.get("porcion"), request.form.get("descripcion"), request.form.get("fechaE"), request.form.get("fechaV"), request.form.get("precio"), f.filename)
+        flash("Se agregó medicamento con éxito")
         db.session.add(medicamento)
         db.session.commit()
         return redirect((url_for('mostrarMedicamentos')))
@@ -87,10 +103,13 @@ def agregarMedicamento():
 def llenareditar(id):
     medicamento = Medicamento.query.filter_by(idMedicamento=id).first()
     empleado = Usuario.query.filter_by(idUsuario=medicamento.idUsuario).first()
-    empleados = Usuario.query.all()
     proveedores = Proveedor.query.all()
     proveedor = Proveedor.query.filter_by(idProveedor=medicamento.idProveedor).first()
-    return render_template("administrador/editarMedicamentos.html", medicamento=medicamento, empleado=empleado, empleados=empleados, proveedor=proveedor, proveedores=proveedores)
+    if empleado.tipo == "Administrador":
+        return render_template("administrador/editarMedicamentos.html", medicamento=medicamento, empleado=empleado, proveedor=proveedor, proveedores=proveedores)
+    else:
+        return render_template("empleado/editarMedicamentos.html", medicamento=medicamento, empleado=empleado,
+                               proveedor=proveedor, proveedores=proveedores)
 
 
 @app.route("/editarMedicamento", methods=['GET', 'POST'])
@@ -98,7 +117,8 @@ def editarMedicamento():
     if request.method == "POST":
         medicaO = Medicamento.query.filter_by(idMedicamento=request.form['idMedicamento']).first()
         proveedor = Proveedor.query.filter_by(nombre=request.form["proveedor"]).first()
-        usuario = Usuario.query.filter_by(nombre=request.form["usuario"]).first()
+        nombre = session['username']
+        usuario = Usuario.query.filter_by(nombre=nombre).first()
         if validarNombreM(medicaO.nombre, request.form['nombre']):
             medicaO.idProveedor = proveedor.idProveedor
             medicaO.idUsuario = usuario.idUsuario
@@ -108,11 +128,11 @@ def editarMedicamento():
             medicaO.descripcion = request.form['descripcion']
             medicaO.fechaE = request.form['fechaE']
             medicaO.fechaV = request.form['fechaV']
-            flash("Medicamento editado con exito")
+            flash("Medicamento editado con éxito")
             db.session.commit()
             return redirect((url_for('mostrarMedicamentos')))
         else:
-            flash("Ocurrio un problema al editar")
+            flash("Ocurrió un problema al editar")
             return redirect((url_for('mostrarMedicamentos')))
 
 
@@ -133,15 +153,19 @@ def eliminarMedicamento(id):
     medica = Medicamento.query.filter_by(idMedicamento=id).first()
     db.session.delete(medica)
     db.session.commit()
-    flash("Medicamento eliminado con exito")
+    flash("Medicamento eliminado con éxito")
     return redirect((url_for('mostrarMedicamentos')))
 
 
 @app.route('/mostrarEmpleados')
 def mostrarEmpleados():
-    empleados = Usuario.query.filter_by(tipo="Empleado")
-    estados = Estado.query.all()
-    return render_template("administrador/mostrarEmpleados.html", empleados=empleados, estados=estados)
+    if 'username' in session:
+        estados = Estado.query.all()
+        empleados = Usuario.query.filter_by(tipo="Empleado")
+        return render_template("administrador/mostrarEmpleados.html", estados=estados, empleados=empleados)
+    else:
+        flash("Necesitas iniciar sesión como administrador")
+        return render_template("index.html")
 
 
 @app.route("/agregarEmpleado", methods=['GET', 'POST'])
@@ -158,7 +182,7 @@ def agregarEmpleado():
         flash("Usuario registrado correctamente, pidale al mismo que cambie su contraseña")
         return redirect((url_for('mostrarEmpleados')))
     else:
-        flash("Ingresaste un dato erroneo")
+        flash("Ingresaste un dato erróneo")
         return redirect((url_for('mostrarEmpleados')))
 
 
@@ -168,7 +192,6 @@ def llenareditarEmpleado(id):
     estadoO = Estado.query.filter_by(idEstado=empleado.idEstado).first()
     estados = Estado.query.all()
     return render_template("administrador/editarEmpleados.html", empleado=empleado, estadoO=estadoO, estados=estados)
-
 
 
 @app.route("/editarEmpleado", methods=['GET', 'POST'])
@@ -183,7 +206,7 @@ def editarEmpleado():
         flash("Empleado editado")
         return redirect((url_for('mostrarEmpleados')))
     else:
-        flash("Ocurrio un error, quiza el nombre que editaste ya existe o ingresaste algun otro dato erroneo")
+        flash("Ocurrió un error, quiza el nombre que editaste ya existe o ingresaste algun otro dato erroneo")
         return redirect((url_for('mostrarEmpleados')))
 
 
@@ -204,14 +227,23 @@ def eliminarEmpleado(id):
     empleado = Usuario.query.filter_by(idUsuario=id).first()
     db.session.delete(empleado)
     db.session.commit()
-    flash("Empleado eliminado con exito")
+    flash("Empleado eliminado con éxito")
     return redirect((url_for('mostrarEmpleados')))
 
 
 @app.route('/mostrarProveedores')
 def mostrarProveedores():
-    proveedores = Proveedor.query.all()
-    return render_template("administrador/mostrarProveedores.html", proveedores=proveedores)
+    if 'username' in session:
+        nombre = session['username']
+        usuario = Usuario.query.filter_by(nombre=nombre).first()
+        proveedores = Proveedor.query.all()
+        if usuario.tipo == "Administrador":
+            return render_template("administrador/mostrarProveedores.html", proveedores=proveedores)
+        else:
+            return render_template("empleado/mostrarProveedores.html", proveedores=proveedores)
+    else:
+        flash("Inicia sesion por favor")
+        return render_template("index.html")
 
 
 @app.route("/agregarProveedor", methods=['GET', 'POST'])
@@ -222,11 +254,11 @@ def agregarProveedor():
         return redirect((url_for('mostrarProveedores')))
     pro = Proveedor.query.filter_by(rfc=request.form['rfc'])
     clien = Cliente.query.filter_by(rfc=request.form['rfc'])
-    if pro or clien:
+    if pro is None or clien is None:
         flash("Ese rfc ya se encuentra registrado")
         return redirect((url_for('mostrarProveedores')))
     else:
-        proveedor = Proveedor(request.form.get["nombre"], request.form.get["rfc"], request.form.get["tel"])
+        proveedor = Proveedor(request.form["nombre"], request.form["rfc"], request.form["tel"])
         db.session.add(proveedor)
         db.session.commit()
         flash("Proveedor registrado correctamente")
@@ -235,23 +267,27 @@ def agregarProveedor():
 
 @app.route("/llenareditarProveedor/<string:id>", methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos
 def llenareditarProveedor(id):
+    nombre = session['username']
+    usuario = Usuario.query.filter_by(nombre=nombre).first()
     proveedor = Proveedor.query.filter_by(idProveedor=id).first()
-    return render_template("administrador/editarProveedores.html", proveedor=proveedor)
+    if usuario.tipo == "Administrador":
+        return render_template("administrador/editarProveedores.html", proveedor=proveedor)
+    else:
+        return render_template("empleado/editarProveedores.html", proveedor=proveedor)
 
 
 @app.route("/editarProveedor", methods=['GET', 'POST'])
 def editarProveedor():
-    usuario = Usuario.query.filter_by(idUsuario=request.form["idUsuario"]).first()
-    estado = Estado.query.filter_by(nombreEstado=request.form['estado']).first()
-    if validarNombreU(usuario.nombre, request.form['nombre']) is True:
-        usuario.nombre = request.form['nombre']
-        usuario.idEstado = estado.idEstado
-        usuario.contra = request.form['contra']
+    proveedor =Proveedor.query.filter_by(idProveedor=request.form['idProveedor']).first()
+    if validarNombreP(proveedor.nombre, request.form['nombre']) is True:
+        proveedor.nombre = request.form['nombre']
+        proveedor.telefono = request.form['tel']
+        proveedor.rfc = request.form['rfc']
         db.session.commit()
-        flash("Empleado editado")
+        flash("Proveedor editado con éxito")
         return redirect((url_for('mostrarProveedores')))
     else:
-        flash("Ocurrio un error, quiza el nombre que editaste ya existe o ingresaste algun otro dato erroneo")
+        flash("Ocurrió un error, quizá el nombre que editaste ya existe o ingresaste algun otro dato erroneo")
         return redirect((url_for('mostrarProveedores')))
 
 
@@ -271,7 +307,7 @@ def eliminarProveedor(id):
     proveedor = Proveedor.query.filter_by(idProveedor=id).first()
     db.session.delete(proveedor)
     db.session.commit()
-    flash("Empleado eliminado con exito")
+    flash("Proveedor eliminado con éxito")
     return redirect((url_for('mostrarProveedores')))
 #Aqui terminan los CRUD
 
@@ -280,6 +316,7 @@ def eliminarProveedor(id):
 def prueba():
     medicamentos = Medicamento.query.all()
     return render_template("cliente/catalogo.html", medicamentos=medicamentos)
+
 
 @app.route("/aniadirC", methods=['GET', 'POST'])
 def aniadirC():
@@ -303,11 +340,13 @@ def aniadirC():
 
 @app.route("/carrito")
 def carrito():
-    id = session['carrito']
-    productos = DetallePedido.query.filter_by(idPedido=id)
-    return render_template("/cliente/carrito.html", productos=productos)
-
-
+    if 'carrito' in session:
+        id = session['carrito']
+        productos = DetallePedido.query.filter_by(idPedido=id)
+        return render_template("/cliente/carrito.html", productos=productos)
+    else:
+        flash("Primero visita el catalogo, no tienes una compra pendiente")
+        return render_template("cliente/cliente.html")
 
 @app.route("/eliminarC/<string:id>", methods=['GET', 'POST'])
 def eliminarC(id):
@@ -317,10 +356,54 @@ def eliminarC(id):
     flash("Eliminado del carrito")
     return redirect(url_for('carrito'))
 
+
 @app.route("/terminarC", methods=['GET', 'POST'])
 def terminarC():
+    id = session['carrito']
+    consulta = DetallePedido.query.filter_by(idPedido=id)
+    pedido = Pedido.query.filter_by(idPedido=id).first()
+    total = 0.0
+    for e in consulta:
+        medicamento = Medicamento.query.filter_by(nombre=e.nombreMedicamento).first()
+        medicamento.cantidad = medicamento.cantidad - e.cantidad
+        db.session.commit()
+        total += e.subTotal
+    pedido.total = total
+    db.session.commit()
     session.pop('carrito')
+    flash("Compra exitosa, espera tu pedido")
     return redirect((url_for('cliente')))
+
+
+@app.route("/mostrarPedidos")
+def mostrarPedidos():
+    nombre = session['username']
+    usuario = Usuario.query.filter_by(nombre=nombre).first()
+    pedidos = Pedido.query.all()
+    if usuario.tipo == "Administrador":
+        return render_template("administrador/mostrarPedidos.html", pedidos=pedidos)
+    elif usuario.tipo == "Empleado":
+        return render_template("empleado/mostrarPedidos.html", pedidos=pedidos)
+    else:
+        return render_template("cliente/mostrarPedidos.html", pedidos=pedidos)
+
+
+@app.route("/eliminarPedido/<string:id>", methods=['GET', 'POST'])
+def eliminarPedido(id):
+    consulta = DetallePedido.query.filter_by(idPedido=id)
+    pedido = Pedido.query.filter_by(idPedido=id).first()
+    for e in consulta:
+        medicamento = Medicamento.query.filter_by(nombre=e.nombreMedicamento)
+        medicamento.cantidad = medicamento.cantidad + e.cantidad
+        db.session.commit()
+    flash("Eliminado con éxito")
+    return redirect(url_for('mostrarPedidos'))
+
+
+@app.route("/editarPedido/<string:id>", methods=['GET', 'POST'])
+def editarPedido(id):
+    session['carrito'] = id
+    return redirect(url_for('carrito'))
 
 
 if __name__ == '__main__':

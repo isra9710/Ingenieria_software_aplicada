@@ -289,7 +289,7 @@
 
     </head>
 
-    <header>
+       <header>
 
 
     		<!---------------------------------BARRA2---------------------------------------->
@@ -310,30 +310,27 @@
     				<!-- La etiqueta <li> se usa en listas ordenadas ( <ol> ), listas desordenadas ( <ul> ) y en listas de menú -->
     				<ul class="navbar-nav">
 
+
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/admin"> Home</a>
-    					</li>
-    					<li class="nav-item">
-    					<!-- link -->
-    						<a class="nav-link" href="/"> Una opcion</a>
+    						<a class="nav-link" href="/mostrarPedidos"> Gestión de Pedidos</a>
     					</li>
 
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/"> Otra opcion</a>
+    						<a class="nav-link" href="/mostrarProveedores"> Gestión proveedores</a>
     					</li>
     					<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/mostrarMedicamentos"> Gestor de medicamentos</a>
+    						<a class="nav-link" href="/mostrarMedicamentos"> Gestión de medicamentos</a>
     					</li>
-    					<li class="nav-item">
+						<li class="nav-item">
     					<!-- link -->
-    						<a class="nav-link" href="/"> Otra opcion</a>
+    						<a class="nav-link" href="/mostrarEmpleados"> Gestión de empleados</a>
     					</li>
 
     					<li class="nav-item">
-    						<a class="nav-link " href="/cerrarSesionAdmin"><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
+    						<a class="nav-link " href="/logout "><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
     					</li>
 
     				</ul>
@@ -350,7 +347,7 @@
     {% with messages= get_flashed_messages() %}
     	{% if messages %}
     		{% for meessage in messages %}
-    			<h3>{{ meessage }}</h3>
+    			<center><h3>{{ meessage }}</h3> </center>
             {% endfor %}
     	{% endif %}
     {% endwith %}
@@ -439,16 +436,7 @@
     					</div>
     					<div class="modal-body">
     						<div class="form-group">
-    							<label>ID Empleado</label>
-    							<select name="emple" required>
-                            <option value="novalido" selected disabled hidden>Selecciona un empleado</option>
-                            {% for administrador in administradores %}
-                                <option>{{ administrador.nombre }}</option>
-                            {% endfor %}
-                        		</select>
-    						</div>
-    						<div class="form-group">
-    							<label>ID Proveedor</label>
+    							<label>Proveedor</label>
     							<select name="proveedor" required>
                             <option value="novalido"  selected disabled hidden>Selecciona un proveedor</option>
                             {% for proveedor in proveedores %}
