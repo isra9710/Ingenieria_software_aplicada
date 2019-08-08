@@ -107,9 +107,9 @@ def editarMedicamento():
             medicaO.porcion = request.form['porcion']
             medicaO.descripcion = request.form['descripcion']
             medicaO.fechaE = request.form['fechaE']
-            medicaO.fechaV = request.form['FechaV']
-            db.commit()
+            medicaO.fechaV = request.form['fechaV']
             flash("Medicamento editado con exito")
+            db.session.commit()
             return redirect((url_for('mostrarMedicamentos')))
         else:
             flash("Ocurrio un problema al editar")
@@ -267,8 +267,8 @@ def validarNombreP(nombreO, nombreN):
             return True
 
 @app.route('/eliminarProveedor/<string:id>', methods=['GET', 'POST'])
-def eliminarEmpleado(id):
-    proveedor= Proveedor.query.filter_by(idProveedor=id).first()
+def eliminarProveedor(id):
+    proveedor = Proveedor.query.filter_by(idProveedor=id).first()
     db.session.delete(proveedor)
     db.session.commit()
     flash("Empleado eliminado con exito")
@@ -276,39 +276,48 @@ def eliminarEmpleado(id):
 #Aqui terminan los CRUD
 
 
-@app.route("/catalogo")
+@app.route("/catalogo", methods=['GET', 'POST'])
 def prueba():
     medicamentos = Medicamento.query.all()
     return render_template("cliente/catalogo.html", medicamentos=medicamentos)
 
-@app.route("/aniadirC/<string:id>")
-def aniadirC(id):
+@app.route("/aniadirC", methods=['GET', 'POST'])
+def aniadirC():
     nombre = session['username']
-    usuario = Usuario.query.filter_by(nombre=nombre)
+    usuario = Usuario.query.filter_by(nombre=nombre).first()
+    cliente = Cliente.query.filter_by(idUsuario=usuario.idUsuario).first()
+    id = request.form.get("id")
     if 'carrito' not in session:
-        pedido = Pedido(usuario.idUsuario, 0.0)
+        pedido = Pedido(cliente.idCliente, 0.0)
         db.session.add(pedido)
         db.session.commit()
         session['carrito'] = pedido.idPedido
     idPedido = session['carrito']
-    medicamento = Medicamento.query.filter_by(idMedicamento=id).first()
-    subTotal = medicamento.precio*request.form.get('cantidad')
-    detalleP = DetallePedido(idPedido, id, subTotal)
+    medicamento = Medicamento.query.filter_by(nombre=id).first()
+    subTotal = medicamento.precio * float(request.form.get('cantidad'))
+    detalleP = DetallePedido(idPedido, id, subTotal, request.form.get('cantidad'))
     db.session.add(detalleP)
     db.session.commit()
-    consulta = DetallePedido.query.filterby(idPedido=idPedido)
-    return render_template("/cliente/carrito.html", consulta=consulta)
+    return redirect(url_for('carrito'))
 
 
-@app.route("/eliminarC/<string:id>")
+@app.route("/carrito")
+def carrito():
+    id = session['carrito']
+    productos = DetallePedido.query.filter_by(idPedido=id)
+    return render_template("/cliente/carrito.html", productos=productos)
+
+
+
+@app.route("/eliminarC/<string:id>", methods=['GET', 'POST'])
 def eliminarC(id):
-    idPedido = session['carrito']
-    detalleP = DetallePedido.query.filter(idPedido=idPedido, idMedicamento=id).first()
+    detalleP = DetallePedido.query.filter_by(idDetallePedido=id).first()
     db.session.delete(detalleP)
     db.session.commit()
+    flash("Eliminado del carrito")
+    return redirect(url_for('carrito'))
 
-
-@app.route("/terminarC")
+@app.route("/terminarC", methods=['GET', 'POST'])
 def terminarC():
     session.pop('carrito')
     return redirect((url_for('cliente')))

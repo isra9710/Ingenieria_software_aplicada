@@ -344,7 +344,7 @@
     {% with messages= get_flashed_messages() %}
     	{% if messages %}
     		{% for meessage in messages %}
-    			<h3>{{ meessage }}</h3>
+	<center><h3>{{ meessage }}</h3></center>
             {% endfor %}
     	{% endif %}
     {% endwith %}
@@ -356,9 +356,7 @@
     						<h2>Gestor <b>Pedido</b></h2><br>
 
     					</div>
-    					<div class="col-sm-6">
-    						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir empleado</span></a>
-    					</div>
+
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
@@ -372,24 +370,23 @@
                             <th>Producto</th>
     						<th>Cantidad</th>
                             <th>Subtotal</th>
-    						<!--<th>Contraseña</th>-->
     						</tr>
                     </thead>
                     <tbody>
                         {% for producto in productos%}
+
                         <tr>
     						<td>
     							<span class="custom-checkbox">
 
     							</span>
     						</td>
-                            <td>{{ producto.nombre }}</td>
-    						<td>{{ cantidad }}</td>
-    						<td>{{ empleado.nombre }}</td>
+                            <td>{{ producto.nombreMedicamento }}</td>
+    						<td>{{ producto.cantidad }}</td>
+    						<td>{{ producto.subTotal }}</td>
                     </td>
 							<td>
-                                <a href="/llenareditarEmpleado/{{ empleado.idUsuario }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="/eliminarEmpleado/{{ empleado.idUsuario }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="/eliminarC/{{ producto.idDetallePedido }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
     {% endfor %}
@@ -398,45 +395,6 @@
 
             </div>
         </div>
-    	<!-- Edit Modal HTML  para agregar-->
-    	<div id="addEmployeeModal" class="modal fade">
-    		<div class="modal-dialog">
-    			<div class="modal-content">
-    				<form method="POST" action="{{url_for('agregarEmpleado')}}" enctype="multipart/form-data">
-    					<div class="modal-header">
-    						<h4 class="modal-title">Agregar empleado</h4>
-    						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    					</div>
-    						<div class="form-group">
-    							<label>Nombre usuario</label>
-    							<textarea class="form-control" name="nombre" required></textarea>
-    						</div>
-    						<div class="form-group">
-    							<label>Contraseña</label>
-
-    							<input  type="number" class="form-control" name="contra" min=" " required />
-
-    							<input  type="text" class="form-control" name="contra"  required />
-
-    						</div>
-						<div class="form-group">
-    							<label>Estado</label>
-    							<select name="estado" required>
-                            <option value="novalido"  selected disabled hidden>Selecciona un estado</option>
-                            {% for estado in estados %}
-                                <option>{{ estado.nombreEstado }}</option>
-                            {% endfor %}
-                        </select>
-
-    					<div class="modal-footer">
-    						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar ">
-    						<input type="submit" class="btn btn-success" value="Agregar empleado">
-    					</div>
-    				</form>
-    			</div>
-    		</div>
-
-    	</div>
 
 
     	<!-- Delete Modal HTML -->

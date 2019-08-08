@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Catalogo2</title>
+    <title>Catalogo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="" />
   <meta name="author" content="" />
@@ -157,14 +156,25 @@
         </div>
  
         <!-- Portfolio Projects -->
-       <form method="POST" action="{{url_for('agregarEmpleado')}}" enctype="multipart/form-data">
         <div class="row">
           <div class="span12">
             <h4 class="heading">Catálogo de <strong>medicamentos</strong></h4>
-            {% for medicamento in medicamentos %}
             <div class="row">
               <section id="projects">
                 <ul id="thumbs" class="portfolio">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+    						<th>
+    							<span class="custom-checkbox">
+
+    							</span>
+    						</th>
+    						</tr>
+                    </thead>
+                    <tbody>
+                    {% for medicamento in medicamentos %}
+                      <form method="POST" action="{{url_for('aniadirC')}}" enctype="multipart/form-data" >
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
@@ -172,21 +182,31 @@
 						<span class="overlay-img"></span>
 						<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
+
+
                     <!-- Thumb Image and Description -->
                     <img src="{{ url_for('static', filename=medicamento.imagen) }}" alt={{medicamento.descripcion}}>
-                  </li>
-                  <button>Agregar</button>
+                  </li><div class="form-group">
+                        <input name="id" readonly value={{medicamento.nombre}}>
+                      <label>Cantidad de productos</label>
+    							<input  type="number" class="form-control" name="cantidad" min="200" required />
+    						</div>
+
+                            <div class="form-group">
+    							  <input type="submit" class="btn btn-success" value="Agregar al carrito">
+    						</div>
+                    </form>
+                    </tr>
                   <!-- End Item Project -->
-                  <!-- Item Project and Filter Name -->
 
-
+</tr>
+                    {% endfor %}
+                    </tbody>
                 </ul>
               </section>
             </div>
-            {% endfor %}
           </div>
         </div>
-       </form>
         <!-- End Portfolio Projects -->
         <!-- divider -->
         <div class="row">
@@ -276,7 +296,5 @@
 
   <script src="{{ url_for('static',filename='js/custom.js') }}"></script>
 </head>
-<body>
 </body>
 </html>
->>>>>>> master

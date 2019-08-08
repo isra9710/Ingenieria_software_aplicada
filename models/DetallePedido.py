@@ -7,13 +7,13 @@ class DetallePedido(db.Model):
     cantidad = db.Column(db.Integer)
     idPedido = db.Column('idPedido', db.Integer, db.ForeignKey("Pedido.idPedido"))
     subTotal = db.Column(db.Float)
-    idMedicamento = db.Column('idMedicamento', db.Integer, db.ForeignKey("Medicamento.idMedicamento"))
-    nombreMedicamento = db.Column('nombre', db.String(45), db.ForeignKey("Medicamento.nombre"))
+    nombreMedicamento = db.Column('nombreMedicamento', db.String(45), db.ForeignKey("Medicamento.nombre"))
 
-    def __init__(self, idPedido, idMedicamento, nombreMedicamento):
+    def __init__(self, idPedido, nombreMedicamento, subTotal, cantidad):
         self.idPedido = idPedido
-        self.idMedicamento = idMedicamento
         self.nombreMedicamento = nombreMedicamento
+        self.subTotal = subTotal
+        self.cantidad = cantidad
 
     def __repr__(self):
         return ''
